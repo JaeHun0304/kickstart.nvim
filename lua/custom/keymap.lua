@@ -31,7 +31,8 @@ vim.keymap.set('n', '<leader>gn', '<cmd>Gitsigns next_hunk<CR>', { desc = 'Go to
 vim.keymap.set('n', '<leader>gp', '<cmd>Gitsigns prev_hunk<CR>', { desc = 'Go to prev git hunk' })
 vim.keymap.set('n', '<leader>gr', '<cmd>Gitsigns reset_hunk<CR>', { desc = 'Reset current hunk on cursor' })
 vim.keymap.set('n', '<leader>gd', '<cmd>Gitsigns diffthis vertical=true<CR>',
-  { desc = 'Vertical diff against latest commit' })
+    { desc = 'Vertical diff against latest commit' })
+vim.keymap.set('n', '<leader>gi', '<cmd>Gitsigns preview_hunk_inline<CR>', { desc = 'preview git hunk in line' })
 
 -- NOTE: Neogit keymaps
 vim.keymap.set('n', '<leader>ng', '<cmd>Neogit kind=floating<CR>', { desc = 'Open neogit in float window' })
@@ -42,7 +43,7 @@ vim.keymap.set('n', 'Y', '^y$', { desc = 'Copy whole line without \n' })
 -- NOTE: Open lsp definitions in split
 vim.keymap.set('n', 'gv', '<cmd> vsplit | lua vim.lsp.buf.definition()<CR>', { desc = 'Open LSP definition on vsplit' })
 vim.keymap.set('n', 'gs', '<cmd> belowright split | lua vim.lsp.buf.definition()<CR>',
-  { desc = 'Open LSP definition on split' })
+    { desc = 'Open LSP definition on split' })
 
 -- NOTE: Portal keymap for the jumplist
 vim.keymap.set('n', '<leader>o', '<cmd>Portal jumplist backward<cr>', { desc = 'Portal jumplist backward' })
@@ -94,9 +95,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- NOTE: Copy current buffer filename
 vim.keymap.set('n', '<leader>yf', '<cmd>let @+ = expand("%:t")<CR>',
-  { desc = 'copy current buffer file name (just file name)' })
+    { desc = 'copy current buffer file name (just file name)' })
 vim.keymap.set('n', '<leader>yF', '<cmd>let @+ = expand("%:p")<CR>',
-  { desc = 'copy current buffer file name (full path)' })
+    { desc = 'copy current buffer file name (full path)' })
 
 -- NOTE: Toggle nvim-tree
 vim.keymap.set('n', '<leader>nt', '<cmd>NvimTreeToggle<CR>', { desc = 'toggle nvim tree window' })
@@ -110,4 +111,4 @@ vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>', { desc = 'Select
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', { desc = 'Save buffer' })
 -- NOTE: ToggleTerm shortcut
 vim.keymap.set({ 'n', 't' }, '<leader>t', '<cmd>ToggleTerm direction=vertical size=60<cr>',
-  { desc = 'Toggleterm on vertical' })
+    { desc = 'Toggleterm on vertical' })
