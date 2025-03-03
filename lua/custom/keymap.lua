@@ -35,7 +35,7 @@ vim.keymap.set('n', '<leader>gd', '<cmd>Gitsigns diffthis vertical=true<CR>',
 vim.keymap.set('n', '<leader>gi', '<cmd>Gitsigns preview_hunk_inline<CR>', { desc = 'preview git hunk in line' })
 
 -- NOTE: Neogit keymaps
-vim.keymap.set('n', '<leader>ng', '<cmd>Neogit kind=floating<CR>', { desc = 'Open neogit in float window' })
+vim.keymap.set('n', '<leader>ng', '<cmd>Neogit<CR>', { desc = 'Open neogit' })
 
 -- NOTE: Copy line without \n with key 'Y'
 vim.keymap.set('n', 'Y', '^y$', { desc = 'Copy whole line without \n' })
@@ -50,8 +50,8 @@ vim.keymap.set('n', '<leader>o', '<cmd>Portal jumplist backward<cr>', { desc = '
 vim.keymap.set('n', '<leader>i', '<cmd>Portal jumplist forward<cr>', { desc = 'Portal jumplist forward' })
 
 -- NOTE: Diffview related keymaps
-vim.keymap.set('n', '<leader>no', '<cmd>DiffviewOpen<CR>', { desc = 'Open diffview panel' })
-vim.keymap.set('n', '<leader>nc', '<cmd>DiffviewClose<CR>', { desc = 'Close diffview panel' })
+vim.keymap.set('n', '<leader>do', '<cmd>DiffviewOpen<CR>', { desc = 'Open diffview panel' })
+vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<CR>', { desc = 'Close diffview panel' })
 
 -- NOTE: abbreviate "vert sb" into vsb
 vim.cmd 'cnorea vsb vert sb'
