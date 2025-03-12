@@ -38,6 +38,7 @@ return {
         -- For major updates, this must be adjusted manually.
         version = '^1.1.0',
       },
+      { 'davvid/telescope-git-grep.nvim' },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -99,6 +100,7 @@ return {
               },
             },
           },
+          git_grep = {}
         },
       }
 
@@ -106,6 +108,7 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'live_grep_args')
+      pcall(require('telescope').load_extension, 'git_grep')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -120,6 +123,8 @@ return {
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>sgg', "<cmd>lua require('git_grep').live_grep()<CR>", { desc = 'Do git live grep' })
+      vim.keymap.set('n', '<leader>sgw', "<cmd>lua require('git_grep').grep()<CR>", { desc = 'Do git grep word under cursor' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

@@ -69,7 +69,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<C-s>', '<cmd>Autosession search<CR>', { desc = 'Open autosession search window' })
 
 -- NOTE: quickfix related keymap
-vim.keymap.set('n', '<leader>q', '<cmd>copen<CR>', { desc = 'Open quickfix window' })
+vim.keymap.set('n', '<leader>q', '<cmd>copen 25<CR>', { desc = 'Open quickfix window' })
 vim.keymap.set('n', '<leader>Q', '<cmd>cclose<CR>', { desc = 'Close quickfix window' })
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

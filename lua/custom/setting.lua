@@ -14,7 +14,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 --  NOTE: open quickfix window for the asyncrun plugin
-vim.g.asyncrun_open = 20
+vim.g.asyncrun_open = 25
 
 --  NOTE: Set noswapfile as default
 vim.opt.swapfile = false
@@ -113,3 +113,23 @@ vim.opt.scrolloff = 10
 
 -- using gui colors
 vim.opt.termguicolors = true
+
+-- Set wildmode like shell completion
+vim.opt.wildmode=longest,list,full
+
+-- Custom commands
+vim.api.nvim_create_user_command('Rg', function(args)
+  local vimCmd = 'AsyncRun rg'
+  if args['args'] then
+    vimCmd = vimCmd .. ' ' .. args['args']
+  end
+  vim.cmd(vimCmd)
+end, { desc = 'AsyncRun and search with ripgrep', nargs = '*' })
+
+vim.api.nvim_create_user_command('Rgc', function(args)
+  local vimCmd = 'AsyncRun rg -tcpp'
+  if args['args'] then
+    vimCmd = vimCmd .. ' ' .. args['args']
+  end
+  vim.cmd(vimCmd)
+end, { desc = 'AsyncRun and search with ripgrep only for cpp code', nargs = '*' })
