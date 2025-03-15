@@ -14,7 +14,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 --  NOTE: open quickfix window for the asyncrun plugin
-vim.g.asyncrun_open = 25
+vim.g.asyncrun_open = 15
 
 --  NOTE: Set noswapfile as default
 vim.opt.swapfile = false
@@ -113,9 +113,6 @@ vim.opt.scrolloff = 10
 
 -- using gui colors
 vim.opt.termguicolors = true
-
--- Set wildmode like shell completion
-vim.opt.wildmode=longest,list,full
 
 -- Custom commands
 vim.api.nvim_create_user_command('Rg', function(args)
