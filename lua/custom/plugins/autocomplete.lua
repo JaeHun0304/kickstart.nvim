@@ -87,7 +87,7 @@ return {
                 completion = {
                     -- To disable autocomplete for specific buffer do this :lua require('cmp').setup.buffer { enabled = false }
                     -- autocomplete = false,
-                    completeopt = 'menu,menuone,noinsert',
+                    completeopt = 'longest,menuone,popup',
                 },
 
                 -- For an understanding of why these mappings were
@@ -95,10 +95,44 @@ return {
                 --
                 -- No, but seriously. Please read `:help ins-completion`, it is really good!
                 mapping = cmp.mapping.preset.insert {
+                    ['<CR>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            if luasnip.expandable() then
+                                luasnip.expand()
+                            else
+                                cmp.confirm({
+                                    select = true,
+                                })
+                            end
+                        else
+                            fallback()
+                        end
+                    end),
+
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                          cmp.select_next_item()
+                        elseif luasnip.locally_jumpable(1) then
+                          luasnip.jump(1)
+                        else
+                          fallback()
+                        end
+                    end, { "i", "s" }),
+
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                          cmp.select_prev_item()
+                        elseif luasnip.locally_jumpable(-1) then
+                          luasnip.jump(-1)
+                        else
+                          fallback()
+                        end
+                    end, { "i", "s" }),
+
                     -- Select the [n]ext item
-                    ['<C-n>'] = cmp.mapping.select_next_item(),
+                    -- ['<C-n>'] = cmp.mapping.select_next_item(),
                     -- Select the [p]revious item
-                    ['<C-p>'] = cmp.mapping.select_prev_item(),
+                    -- ['<C-p>'] = cmp.mapping.select_prev_item(),
 
                     -- Scroll the documentation window [b]ack / [f]orward
                     ['<C-b>'] = cmp.mapping.scroll_docs(-4),

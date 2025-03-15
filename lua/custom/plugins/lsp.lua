@@ -165,14 +165,9 @@ return {
                 clangd = {
                     cmd = {
                         'clangd',
-                        '--header-insertion=never',
                         '--background-index',
-                        '--background-index-priority=normal',
                         '--completion-style=detailed',
-                        '--function-arg-placeholders=0',
-                        '-j=12',
                         '--clang-tidy',
-                        '--pch-storage=memory',
                     },
                 },
                 -- gopls = {},
