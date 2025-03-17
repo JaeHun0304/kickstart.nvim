@@ -165,6 +165,7 @@ return {
                 clangd = {
                     cmd = {
                         'clangd',
+                        '--header-insertion=never',
                         '--background-index',
                         '--completion-style=detailed',
                         '--clang-tidy',
