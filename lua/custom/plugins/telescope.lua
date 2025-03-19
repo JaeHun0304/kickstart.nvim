@@ -74,8 +74,7 @@ return {
         -- },
         -- pickers = {}
         defaults = {
-          layout_strategy = 'horizontal',
-          layout_config = { width = 0.95, height = 0.95 },
+          layout_strategy = 'flex',
           mappings = {
             n = {
               ['d'] = require('telescope.actions').delete_buffer,

@@ -116,7 +116,7 @@ vim.opt.termguicolors = true
 
 -- Set wildmode for command line
 vim.opt.wildmenu = true
-vim.opt.wildmode='longest:list,full'
+vim.opt.wildmode='longest,list,full'
 
 -- Custom commands
 vim.api.nvim_create_user_command('Rg', function(args)
