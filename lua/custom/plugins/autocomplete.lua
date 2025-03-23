@@ -87,7 +87,7 @@ return {
                 completion = {
                     -- To disable autocomplete for specific buffer do this :lua require('cmp').setup.buffer { enabled = false }
                     -- autocomplete = false,
-                    completeopt = 'longest,menuone,popup',
+                    -- completeopt = 'longest,menuone,popup',
                 },
 
                 -- For an understanding of why these mappings were
@@ -95,40 +95,6 @@ return {
                 --
                 -- No, but seriously. Please read `:help ins-completion`, it is really good!
                 mapping = cmp.mapping.preset.insert {
-                    ['<CR>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            if luasnip.expandable() then
-                                luasnip.expand()
-                            else
-                                cmp.confirm({
-                                    select = true,
-                                })
-                            end
-                        else
-                            fallback()
-                        end
-                    end),
-
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                          cmp.select_next_item()
-                        elseif luasnip.locally_jumpable(1) then
-                          luasnip.jump(1)
-                        else
-                          fallback()
-                        end
-                    end, { "i", "s" }),
-
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                          cmp.select_prev_item()
-                        elseif luasnip.locally_jumpable(-1) then
-                          luasnip.jump(-1)
-                        else
-                          fallback()
-                        end
-                    end, { "i", "s" }),
-
                     -- Select the [n]ext item
                     -- ['<C-n>'] = cmp.mapping.select_next_item(),
                     -- Select the [p]revious item
@@ -145,9 +111,9 @@ return {
 
                     -- If you prefer more traditional completion keymaps,
                     -- you can uncomment the following lines
-                    -- ['<CR>'] = cmp.mapping.confirm { select = true },
-                    -- ['<Tab>'] = cmp.mapping.select_next_item(),
-                    -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+                    ['<CR>'] = cmp.mapping.confirm { select = true },
+                    ['<Tab>'] = cmp.mapping.select_next_item(),
+                    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
                     -- Manually trigger a completion from nvim-cmp.
                     --  Generally you don't need this, because nvim-cmp will display
@@ -163,17 +129,17 @@ return {
                     -- <c-l> will move you to the right of each of the expansion locations.
                     -- <c-h> is similar, except moving you backwards.
                     --[[
-          ['<C-l>'] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { 'i', 's' }),
-          ]]
+                      ['<C-l>'] = cmp.mapping(function()
+                        if luasnip.expand_or_locally_jumpable() then
+                          luasnip.expand_or_jump()
+                        end
+                      end, { 'i', 's' }),
+                      ['<C-h>'] = cmp.mapping(function()
+                        if luasnip.locally_jumpable(-1) then
+                          luasnip.jump(-1)
+                        end
+                      end, { 'i', 's' }),
+                      ]]
                     -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
                     --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
                 },

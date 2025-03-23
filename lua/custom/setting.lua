@@ -36,15 +36,15 @@ vim.g.have_nerd_font = true
 -- https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
 -- https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' }, {
-  pattern = '*',
-  command = "if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif",
+    pattern = '*',
+    command = "if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif",
 })
 
 -- NOTE: Notification after file change
 -- https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
 vim.api.nvim_create_autocmd({ 'FileChangedShellPost' }, {
-  pattern = '*',
-  command = "echohl WarningMsg | echo 'File changed on disk. Buffer reloaded.' | echohl None",
+    pattern = '*',
+    command = "echohl WarningMsg | echo 'File changed on disk. Buffer reloaded.' | echohl None",
 })
 
 --  NOTE: Default set wrap for the diff
@@ -90,7 +90,7 @@ vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 500
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -116,21 +116,21 @@ vim.opt.termguicolors = true
 
 -- Set wildmode for command line
 vim.opt.wildmenu = true
-vim.opt.wildmode='longest:list,full'
+vim.opt.wildmode = 'longest:list,full'
 
 -- Custom commands
 vim.api.nvim_create_user_command('Rg', function(args)
-  local vimCmd = 'AsyncRun rg'
-  if args['args'] then
-    vimCmd = vimCmd .. ' ' .. args['args']
-  end
-  vim.cmd(vimCmd)
+    local vimCmd = 'AsyncRun rg'
+    if args['args'] then
+        vimCmd = vimCmd .. ' ' .. args['args']
+    end
+    vim.cmd(vimCmd)
 end, { desc = 'AsyncRun and search with ripgrep', nargs = '*' })
 
 vim.api.nvim_create_user_command('Rgc', function(args)
-  local vimCmd = 'AsyncRun rg -tcpp'
-  if args['args'] then
-    vimCmd = vimCmd .. ' ' .. args['args']
-  end
-  vim.cmd(vimCmd)
+    local vimCmd = 'AsyncRun rg -tcpp'
+    if args['args'] then
+        vimCmd = vimCmd .. ' ' .. args['args']
+    end
+    vim.cmd(vimCmd)
 end, { desc = 'AsyncRun and search with ripgrep only for cpp code', nargs = '*' })
