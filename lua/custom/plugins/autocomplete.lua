@@ -87,7 +87,7 @@ return {
                 completion = {
                     -- To disable autocomplete for specific buffer do this :lua require('cmp').setup.buffer { enabled = false }
                     -- autocomplete = false,
-                    -- completeopt = 'longest,menuone,popup',
+                    completeopt = table.concat(vim.opt.completeopt:get(), ","),
                 },
 
                 -- For an understanding of why these mappings were
