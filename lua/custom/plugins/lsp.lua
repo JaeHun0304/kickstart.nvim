@@ -165,12 +165,16 @@ return {
                 clangd = {
                     cmd = {
                         'clangd',
+                        '--all-scopes-completion',
                         '--background-index',
+                        '--background-index-priority=normal',
                         '--completion-style=detailed',
+                        '--function-arg-placeholders=0',
+                        '--header-insertion=never',
                         '--clang-tidy',
                         '--pch-storage=memory',
-                        '-j=4',
-                        '--all-scopes-completion',
+                        '--malloc-trim',
+
                     },
                 },
                 -- gopls = {},

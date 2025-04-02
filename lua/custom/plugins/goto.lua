@@ -1,8 +1,5 @@
 -- ~/.config/nvim/lua/custom/plugins/goto.lua
 return {
-  -- NOTE: Portal for the jumplist enhancements
-  { 'cbochs/portal.nvim', opts = {} },
-
   -- NOTE: Plugins to preview LSP definition
   {
     'rmagatti/goto-preview',

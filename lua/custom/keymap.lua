@@ -65,9 +65,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 
--- NOTE: Autosession search window
-vim.keymap.set('n', '<C-s>', '<cmd>Autosession search<CR>', { desc = 'Open autosession search window' })
-
 -- NOTE: quickfix related keymap
 vim.keymap.set('n', '<leader>q', '<cmd>copen 15<CR>', { desc = 'Open quickfix window' })
 vim.keymap.set('n', '<leader>Q', '<cmd>cclose<CR>', { desc = 'Close quickfix window' })
@@ -84,14 +81,6 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- NOTE: Copy current buffer filename
 vim.keymap.set('n', '<leader>yf', '<cmd>let @+ = expand("%:t")<CR>',
@@ -112,3 +101,7 @@ vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', { desc = 'Save buffer' })
 -- NOTE: ToggleTerm shortcut
 vim.keymap.set({ 'n', 't' }, '<leader>t', '<cmd>ToggleTerm direction=vertical size=60<cr>',
     { desc = 'Toggleterm on vertical' })
+
+-- NOTE: scroll left and right with 20 chars
+vim.keymap.set('n', '<C-h>', '20zh', { desc = 'Scroll left 20 chars' })
+vim.keymap.set('n', '<C-l>', '20zl', { desc = 'Scroll right 20 chars' })

@@ -116,5 +116,5 @@ vim.opt.termguicolors = true
 
 -- Set wildmode for command line
 vim.opt.wildmenu = true
-vim.opt.wildmode = 'longest:list,full'
-vim.opt.completeopt = "menuone,noinsert"
+vim.opt.wildmode = 'longest,list,full'
+vim.opt.completeopt = "longest,preview"

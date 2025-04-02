@@ -9,6 +9,7 @@ return {
             { '<leader>wr', '<cmd>SessionSearch<CR>',         desc = 'Session search' },
             { '<leader>ws', '<cmd>SessionSave<CR>',           desc = 'Save session' },
             { '<leader>wa', '<cmd>SessionToggleAutoSave<CR>', desc = 'Toggle autosave' },
+            { '<leader>wd', '<cmd>Autosession delete<CR>',    desc = 'Delete selected session' },
         },
         ---enables autocomplete for opts
         ---@module "auto-session"
