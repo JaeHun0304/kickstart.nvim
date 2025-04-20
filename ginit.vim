@@ -2,7 +2,7 @@
 set mouse=a
 
 " Set Editor Font
-if exists(':GuiFont')
+if exists(':GuiFont!')
     " Use GuiFont! to ignore font errors
     GuiFont SauceCodePro Nerd Font:h14
 endif

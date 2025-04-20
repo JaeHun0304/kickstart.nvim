@@ -172,9 +172,9 @@ return {
                         '--function-arg-placeholders=0',
                         '--header-insertion=never',
                         '--clang-tidy',
-                        '--pch-storage=memory',
+                        '--pch-storage=disk',
                         '--malloc-trim',
-
+                        '-j=4'
                     },
                 },
                 -- gopls = {},

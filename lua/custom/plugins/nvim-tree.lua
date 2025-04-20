@@ -48,6 +48,9 @@ return {
                     -- Option B: Simple tab behavior: Always preview
                     -- vim.keymap.set('n', '<Tab>', preview.node_under_cursor, opts 'Preview')
                 end,
+                filters = {
+                    git_ignored = false,
+                },
             }
         end,
     }

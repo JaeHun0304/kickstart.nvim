@@ -99,9 +99,12 @@ vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>', { desc = 'Select
 -- NOTE: Commands
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', { desc = 'Save buffer' })
 -- NOTE: ToggleTerm shortcut
-vim.keymap.set({ 'n', 't' }, '<leader>t', '<cmd>ToggleTerm direction=vertical size=60<cr>',
+vim.keymap.set({ 'n', 't' }, '<leader>t', '<cmd>ToggleTerm direction=horizontal size=25<cr>',
     { desc = 'Toggleterm on vertical' })
 
 -- NOTE: scroll left and right with 20 chars
 vim.keymap.set('n', '<C-h>', '20zh', { desc = 'Scroll left 20 chars' })
 vim.keymap.set('n', '<C-l>', '20zl', { desc = 'Scroll right 20 chars' })
+
+-- NOTE: insert space in normal mode with <space>
+vim.keymap.set('n', '<space>', 'a<space><esc>', { desc = 'Insert space in normale mode' })

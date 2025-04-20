@@ -1,5 +1,6 @@
 -- ~/.config/nvim/lua/custom/settings.lua
 
+vim.opt.guifont = 'Monospace:h12'
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -90,7 +91,7 @@ vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 250
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -117,4 +118,6 @@ vim.opt.termguicolors = true
 -- Set wildmode for command line
 vim.opt.wildmenu = true
 vim.opt.wildmode = 'longest,list,full'
-vim.opt.completeopt = "longest,preview"
+
+-- Set completeopt
+vim.opt.completeopt = 'menu,menuone,noselect'

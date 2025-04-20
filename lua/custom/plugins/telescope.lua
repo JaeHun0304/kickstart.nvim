@@ -79,8 +79,14 @@ return {
                             ['d'] = require('telescope.actions').delete_buffer,
                         },
                     },
-                    find_files = {
-                        hidden = true,
+                    vimgrep_arguments = {
+                        "rg",
+                        "--color=never",
+                        "--no-heading",
+                        "--with-filename",
+                        "--line-number",
+                        "--column",
+                        "--smart-case",
                     },
                 },
 
@@ -111,13 +117,19 @@ return {
             local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
             vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
             vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-            vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+            vim.keymap.set('n', '<leader>sf', function() builtin.find_files({ no_ignore = true, hidden = true }) end,
+                { desc = '[S]earch [F]iles' })
             vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
             vim.keymap.set('n', '<leader>sw', live_grep_args_shortcuts.grep_word_under_cursor,
                 { desc = '[S]earch current [W]ord' })
+            vim.keymap.set('v', '<leader>sv', live_grep_args_shortcuts.grep_visual_selection,
+                { desc = '[S]earch current [V]isual Selection' })
             vim.keymap.set('n', '<leader>sg',
                 "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
                 { desc = '[S]earch by [G]rep' })
+            vim.keymap.set('n', '<leader>sc',
+                function() builtin.live_grep({ type_filter = "cpp", }) end,
+                { desc = '[S]earch by [G]rep cpp code' })
             vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
             vim.keymap.set('n', '<leader>sj', builtin.jumplist, { desc = '[S]earch [J]umplist' })
             vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
