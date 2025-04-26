@@ -1,6 +1,5 @@
 -- ~/.config/nvim/lua/custom/settings.lua
 
-vim.opt.guifont = 'Monospace:h12'
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -13,6 +12,14 @@ vim.env.BASH_ENV = '~/.vim_bash_env'
 --  NOTE: Disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- Indentation settings (Lua)
+vim.opt.expandtab = true    -- Use spaces instead of tabs
+vim.opt.tabstop = 4         -- Number of spaces tabs count for
+vim.opt.shiftwidth = 4      -- Number of spaces to use for autoindent
+vim.opt.softtabstop = 4     -- Number of spaces inserted when pressing Tab
+vim.opt.autoindent = true   -- Copy indent from current line when starting new line
+vim.opt.smartindent = true  -- Smart autoindenting when starting a new line
 
 --  NOTE: open quickfix window for the asyncrun plugin
 vim.g.asyncrun_open = 15

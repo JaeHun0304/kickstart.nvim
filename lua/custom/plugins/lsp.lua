@@ -169,12 +169,9 @@ return {
                         '--background-index',
                         '--background-index-priority=normal',
                         '--completion-style=detailed',
-                        '--function-arg-placeholders=0',
                         '--header-insertion=never',
                         '--clang-tidy',
-                        '--pch-storage=disk',
                         '--malloc-trim',
-                        '-j=4'
                     },
                 },
                 -- gopls = {},
