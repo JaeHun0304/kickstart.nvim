@@ -14,11 +14,6 @@ return {
         },
         config = function()
             require("nvim-tree").setup {
-                actions = {
-                    rename = {
-                        enable = true,
-                    }
-                },
                 on_attach = function(bufnr)
                     local api = require('nvim-tree.api')
 
