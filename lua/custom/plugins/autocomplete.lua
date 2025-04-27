@@ -113,7 +113,7 @@ return {
                     ['<Tab>'] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             -- 1) menu open? confirm the selection
-                            cmp.confirm({ select = true })
+                            cmp.select_next_item()
                         elseif has_words_before() then
                             -- 2) word before cursor? trigger the completion menu
                             cmp.complete()
