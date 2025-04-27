@@ -35,6 +35,7 @@ vim.keymap.set('n', '<leader>gd', ':Gdiffsplit<CR>')  -- Git diff
 vim.keymap.set('n', '<leader>gc', ':G commit<CR>')     -- Git commit
 vim.keymap.set('n', '<leader>gp', ':G push<CR>')       -- Git push
 vim.keymap.set('n', '<leader>gl', ':G pull<CR>')       -- Git pull
+vim.keymap.set('n', '<leader>gf', ':G fetch<CR>')      -- Git fetch
 
 -- NOTE: Neogit keymaps
 vim.keymap.set('n', '<leader>ng', '<cmd>Neogit<CR>', { desc = 'Open neogit' })

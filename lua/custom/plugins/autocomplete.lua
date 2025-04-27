@@ -95,25 +95,19 @@ return {
                 --
                 -- No, but seriously. Please read `:help ins-completion`, it is really good!
                 mapping = cmp.mapping.preset.insert {
-                    -- Select the [n]ext item
-                    ['<C-n>'] = cmp.mapping.select_next_item(),
-                    -- Select the [p]revious item
-                    ['<C-p>'] = cmp.mapping.select_prev_item(),
+                    -- Optional: explicitly fallback to normal behavior
+                    ['<Up>'] = cmp.mapping(function(fallback)
+                      fallback()   -- Do default Up arrow (move cursor)
+                    end, { 'i', 'c' }),
 
-                    -- Scroll the documentation window [b]ack / [f]orward
-                    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-                    -- Accept ([y]es) the completion.
-                    --  This will auto-import if your LSP supports it.
-                    --  This will expand snippets if the LSP sent a snippet.
-                    ['<C-y>'] = cmp.mapping.confirm { select = true },
+                    ['<Down>'] = cmp.mapping(function(fallback)
+                      fallback()   -- Do default Down arrow
+                    end, { 'i', 'c' }),
 
                     -- If you prefer more traditional completion keymaps,
-                    -- you can uncomment the following lines
                     ['<CR>'] = cmp.mapping.confirm { select = false },
-                    -- ['<Tab>'] = cmp.mapping.select_next_item(),
-                    -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+                    ['<Tab>'] = cmp.mapping.select_next_item(),
+                    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
                     -- Manually trigger a completion from nvim-cmp.
                     --  Generally you don't need this, because nvim-cmp will display
@@ -146,7 +140,7 @@ return {
                 sources = {
                     { name = 'nvim_lsp' },
                     { name = 'luasnip' },
-                    -- { name = 'path' },
+                    { name = 'path' },
                     { name = 'buffer' },
                     { name = 'cmdline' },
                 },
