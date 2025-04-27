@@ -30,7 +30,6 @@ vim.keymap.set('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>')
 vim.keymap.set('n', '<leader>gn', '<cmd>Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
 vim.keymap.set('n', '<leader>gp', '<cmd>Gitsigns prev_hunk<CR>', { desc = 'Go to prev git hunk' })
 vim.keymap.set('n', '<leader>gr', '<cmd>Gitsigns reset_hunk<CR>', { desc = 'Reset current hunk on cursor' })
-vim.keymap.set('n', '<leader>gs', ':G<CR>')      -- Git status
 vim.keymap.set('n', '<leader>gd', ':Gdiffsplit<CR>')  -- Git diff
 vim.keymap.set('n', '<leader>gc', ':G commit<CR>')     -- Git commit
 vim.keymap.set('n', '<leader>gp', ':G push<CR>')       -- Git push

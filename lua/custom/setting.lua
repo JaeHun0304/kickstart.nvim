@@ -131,3 +131,7 @@ vim.opt.wildmode = 'longest,list,full'
 
 -- Set completeopt
 vim.opt.completeopt = 'menu,menuone,noselect'
+
+-- Use ripgrep for vim :grep command
+vim.o.grepprg = "rg --vimgrep --smart-case"
+vim.o.grepformat = "%f:%l:%c:%m"
