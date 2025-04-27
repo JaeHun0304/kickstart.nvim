@@ -78,6 +78,13 @@ return {
                         }
                     })
             })
+            -- helper: are we after a word character? (so we know when to trigger completion)
+            local has_words_before = function()
+                local col = vim.fn.col('.') - 1
+                if col == 0 then return false end
+                local line = vim.fn.getline('.')
+                return not line:sub(col, col):match('%s')
+            end
             cmp.setup {
                 snippet = {
                     expand = function(args)
@@ -86,7 +93,7 @@ return {
                 },
                 completion = {
                     -- To disable autocomplete for specific buffer do this :lua require('cmp').setup.buffer { enabled = false }
-                    -- autocomplete = false,
+                    autocomplete = false,
                     completeopt = table.concat(vim.opt.completeopt:get(), ","),
                 },
                 preselect = cmp.PreselectMode.None, -- Do not preselect anything from menu
@@ -103,12 +110,30 @@ return {
                     ['<Down>'] = cmp.mapping(function(fallback)
                       fallback()   -- Do default Down arrow
                     end, { 'i', 'c' }),
+                    ['<Tab>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            -- 1) menu open? confirm the selection
+                            cmp.confirm({ select = true })
+                        elseif has_words_before() then
+                            -- 2) word before cursor? trigger the completion menu
+                            cmp.complete()
+                        else
+                            -- 3) nothing else matched: do normal Tab (indent)
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
 
-                    -- If you prefer more traditional completion keymaps,
+                    ['<S-Tab>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                    -- <CR> to confirm completion
                     ['<CR>'] = cmp.mapping.confirm { select = false },
-                    ['<Tab>'] = cmp.mapping.select_next_item(),
-                    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
+                    -- <Esc> to close completion
+                    ['<Esc>'] = cmp.mapping.close(),    -- just closes the menu
                     -- Manually trigger a completion from nvim-cmp.
                     --  Generally you don't need this, because nvim-cmp will display
                     --  completions whenever it has completion options available.

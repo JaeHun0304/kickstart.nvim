@@ -6,14 +6,10 @@
 -- Move to previous/next
 vim.keymap.set('n', '<leader>m', '<Cmd>BufferPrevious<CR>')
 vim.keymap.set('n', '<leader>.', '<Cmd>BufferNext<CR>')
-vim.keymap.set('n', '<leader>d', '<Cmd>BufferClose<CR>')
+vim.keymap.set('n', '<leader>d', '<Cmd>BufferDelete<CR>')
 
 -- Pin/unpin buffer
 vim.keymap.set('n', '<A-p>', '<Cmd>BufferPin<CR>')
-
--- Magic buffer-picking mode
-vim.keymap.set('n', '<C-p>', '<Cmd>BufferPick<CR>')
-vim.keymap.set('n', '<C-s-p>', '<Cmd>BufferPickDelete<CR>')
 
 -- Sort automatically by...
 vim.keymap.set('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>')
@@ -50,10 +46,6 @@ vim.keymap.set('n', 'gs', '<cmd> belowright split | lua vim.lsp.buf.definition()
 -- NOTE: Portal keymap for the jumplist
 vim.keymap.set('n', '<leader>o', '<cmd>Portal jumplist backward<cr>', { desc = 'Portal jumplist backward' })
 vim.keymap.set('n', '<leader>i', '<cmd>Portal jumplist forward<cr>', { desc = 'Portal jumplist forward' })
-
--- NOTE: Diffview related keymaps
-vim.keymap.set('n', '<leader>do', '<cmd>DiffviewOpen<CR>', { desc = 'Open diffview panel' })
-vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<CR>', { desc = 'Close diffview panel' })
 
 -- NOTE: abbreviate "vert sb" into vsb
 vim.cmd 'cnorea vsb vert sb'
