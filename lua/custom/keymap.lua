@@ -84,3 +84,5 @@ vim.keymap.set('n', '<C-l>', '20zl', { desc = 'Scroll right 20 chars' })
 
 -- NOTE: insert space in normal mode with <space>
 vim.keymap.set('n', '<space>', 'a<space><esc>', { desc = 'Insert space in normale mode' })
+vim.keymap.set('n', '<leader>ws', '<cmd>SessionSearch<CR>', { desc = 'Session search' })
+vim.keymap.set('n', '<leader>wd', '<cmd>Autosession delete<CR>', { desc = 'Session search' })

@@ -35,7 +35,7 @@ vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 
 -- NOTE: cmake to build from ./build dir
-vim.opt.makeprg = 'cmake --build build'
+vim.opt.makeprg = 'cmake --preset default; cmake --build --preset default'
 
 --  NOTE: For enhancing autosession experience
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
