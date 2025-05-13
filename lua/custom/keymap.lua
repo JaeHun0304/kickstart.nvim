@@ -6,7 +6,7 @@
 -- Move to previous/next
 vim.keymap.set('n', '<leader>m', '<Cmd>BufferPrevious<CR>')
 vim.keymap.set('n', '<leader>.', '<Cmd>BufferNext<CR>')
-vim.keymap.set('n', '<leader>d', '<Cmd>BufferDelete<CR>')
+-- vim.keymap.set('n', '<leader>d', '<Cmd>bd!<CR>')
 
 -- Pin/unpin buffer
 vim.keymap.set('n', '<A-p>', '<Cmd>BufferPin<CR>')
@@ -16,14 +16,12 @@ vim.keymap.set('n', '<A-p>', '<Cmd>BufferPin<CR>')
 -- :BarbarDisable - very bad command, should never be used
 
 -- NOTE: Git plugins related keymaps
-vim.keymap.set('n', '<leader>hn', '<cmd>Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
-vim.keymap.set('n', '<leader>hp', '<cmd>Gitsigns prev_hunk<CR>', { desc = 'Go to prev git hunk' })
-vim.keymap.set('n', '<leader>hr', '<cmd>Gitsigns reset_hunk<CR>', { desc = 'Reset current hunk on cursor' })
-vim.keymap.set('n', '<leader>gd', ':Gdiffsplit<CR>')  -- Git diff
-vim.keymap.set('n', '<leader>gc', ':G commit<CR>')     -- Git commit
-vim.keymap.set('n', '<leader>gp', ':G push<CR>')       -- Git push
-vim.keymap.set('n', '<leader>gl', ':G pull<CR>')       -- Git pull
-vim.keymap.set('n', '<leader>gf', ':G fetch<CR>')      -- Git fetch
+vim.keymap.set('n', '<leader>gn', '<cmd>Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
+vim.keymap.set('n', '<leader>gp', '<cmd>Gitsigns prev_hunk<CR>', { desc = 'Go to prev git hunk' })
+vim.keymap.set('n', '<leader>gr', '<cmd>Gitsigns reset_hunk<CR>', { desc = 'Go to prev git hunk' })
+vim.keymap.set('n', '<leader>ng', '<cmd>Neogit<CR>', { desc = 'open neogit window' })
+vim.keymap.set('n', '<leader>do', '<cmd>DiffviewOpen<CR>', { desc = 'open diffview panel' })
+vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<CR>', { desc = 'close diffview panel' })
 
 -- NOTE: Copy line without \n with key 'Y'
 vim.keymap.set('n', 'Y', '^y$', { desc = 'Copy whole line without \n' })

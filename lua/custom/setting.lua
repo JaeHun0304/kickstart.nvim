@@ -98,7 +98,7 @@ vim.opt.updatetime = 300
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 250
+vim.opt.timeoutlen = 500
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -130,7 +130,7 @@ vim.opt.wildmode = 'longest,list,full'
 vim.opt.completeopt = 'menu,menuone,noselect'
 
 -- Use ripgrep for vim :grep command
-vim.o.grepprg = "rg --vimgrep --smart-case"
+vim.o.grepprg = "rg --vimgrep --smart-case --color=never"
 vim.o.grepformat = "%f:%l:%c:%m"
 
 -- Highlight when yanking (copying) text
@@ -143,3 +143,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+-- Custom Git push command to gerrit main
+vim.api.nvim_create_user_command(
+    "GitPushMain",
+    function()
+        vim.cmd("Git push origin HEAD:refs/for/main")
+    end,
+    {}
+)
+-- Custom Git pull command from origin/main with rebase
+vim.api.nvim_create_user_command(
+    "GitPullMain",
+    function()
+        vim.cmd("Git pull --rebase origin/main")
+    end,
+    {}
+)

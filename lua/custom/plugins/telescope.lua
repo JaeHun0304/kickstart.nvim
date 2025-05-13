@@ -10,7 +10,8 @@ return {
     { -- Fuzzy Finder (files, lsp, etc)
         'nvim-telescope/telescope.nvim',
         event = 'VimEnter',
-        branch = '0.1.x',
+        -- Pull in rolling release for now. Once settled, try new stable version later
+        -- branch = '0.1.x',
         dependencies = {
             'nvim-lua/plenary.nvim',
             'junegunn/fzf',
@@ -98,7 +99,7 @@ return {
                         auto_quoting = true,
                         mappings = {
                             i = {
-                                ['<C-i>'] = lga_actions.quote_prompt(),
+                                ['<Tab>'] = lga_actions.quote_prompt({}),
                                 ['<C-c>'] = lga_actions.quote_prompt({ postfix = " -tcpp" }),
                                 ['<C-t>'] = lga_actions.quote_prompt({ postfix = " -tconfig" }),
                             },
