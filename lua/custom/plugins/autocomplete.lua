@@ -13,7 +13,7 @@ return {
                 config = function()
                     -- ✅ FIX: Require inside the config function
                     local luasnip = require("luasnip")
-                    
+
                     -- Optional: Lazy-load VSCode-style snippets
                     require("luasnip.loaders.from_vscode").lazy_load()
 
