@@ -12,23 +12,44 @@ return {
             { 'folke/neodev.nvim',       opts = {} },
         },
         config = function()
+            vim.lsp.set_log_level("off") -- Disable LSP log
+            local hostname = vim.fn.hostname()
             local lspconfig = require('lspconfig')
-            lspconfig.clangd.setup({
-                cmd = { "/home/jaehjung/bin/clangd",
-                      "--all-scopes-completion",
-                      "--background-index",
-                      "--completion-style=detailed",
-                      "--header-insertion=never",
-                      "--function-arg-placeholders=0",
-                      "--clang-tidy",
-                      "--limit-references=50",
-                      "--limit-results=20",
-                      -- add any other options you want
-                },  -- 🛠️ Use clangd symlink in ~/bin
-                filetypes = { "c", "cpp", "objc", "objcpp" },
-                root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"), -- Find project root
-                capabilities = require('cmp_nvim_lsp').default_capabilities(),           -- (optional) if you use nvim-cmp
-            })
+            if string.find(hostname, "atletx") then
+                lspconfig.clangd.setup({
+                    cmd = { "/home/jaehjung/bin/clangd",
+                          "--all-scopes-completion",
+                          "--background-index=false",
+                          "--completion-style=detailed",
+                          "--header-insertion=never",
+                          "--function-arg-placeholders=0",
+                          "--clang-tidy",
+                          "--limit-references=50",
+                          "--limit-results=100",
+                          -- add any other options you want
+                    },  -- 🛠️ Use clangd symlink in ~/bin
+                    filetypes = { "c", "cpp", "objc", "objcpp" },
+                    root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"), -- Find project root
+                    capabilities = require('cmp_nvim_lsp').default_capabilities(),           -- (optional) if you use nvim-cmp
+                })
+            else
+                lspconfig.clangd.setup({
+                    cmd = { "/home/jaehjung/bin/clangd",
+                          "--all-scopes-completion",
+                          "--background-index",
+                          "--completion-style=detailed",
+                          "--header-insertion=never",
+                          "--function-arg-placeholders=0",
+                          "--clang-tidy",
+                          "--limit-references=50",
+                          "--limit-results=100",
+                          -- add any other options you want
+                    },  -- 🛠️ Use clangd symlink in ~/bin
+                    filetypes = { "c", "cpp", "objc", "objcpp" },
+                    root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"), -- Find project root
+                    capabilities = require('cmp_nvim_lsp').default_capabilities(),           -- (optional) if you use nvim-cmp
+                })
+            end
             --  This function gets run when an LSP attaches to a particular buffer.
             --    That is to say, every time a new file is opened that is associated with
             --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this

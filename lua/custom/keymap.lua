@@ -6,6 +6,7 @@
 -- Move to previous/next
 vim.keymap.set('n', '<leader>m', '<Cmd>BufferPrevious<CR>')
 vim.keymap.set('n', '<leader>.', '<Cmd>BufferNext<CR>')
+vim.keymap.set('n', '<leader>d', '<Cmd>BufferDelete<CR>')
 -- vim.keymap.set('n', '<leader>d', '<Cmd>bd!<CR>')
 
 -- Pin/unpin buffer
@@ -19,6 +20,7 @@ vim.keymap.set('n', '<A-p>', '<Cmd>BufferPin<CR>')
 vim.keymap.set('n', '<leader>gn', '<cmd>Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
 vim.keymap.set('n', '<leader>gp', '<cmd>Gitsigns prev_hunk<CR>', { desc = 'Go to prev git hunk' })
 vim.keymap.set('n', '<leader>gr', '<cmd>Gitsigns reset_hunk<CR>', { desc = 'Go to prev git hunk' })
+vim.keymap.set('n', '<leader>gi', '<cmd>Gitsigns preview_hunk_inline<CR>', { desc = 'Preview git hunk inline' })
 vim.keymap.set('n', '<leader>ng', '<cmd>Neogit<CR>', { desc = 'open neogit window' })
 vim.keymap.set('n', '<leader>do', '<cmd>DiffviewOpen<CR>', { desc = 'open diffview panel' })
 vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<CR>', { desc = 'close diffview panel' })
@@ -57,7 +59,7 @@ vim.keymap.set('n', '<C-p>', '<cmd>cprev<CR>', { desc = 'go to prev quickfix ite
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- NOTE: Copy current buffer filename
-vim.keymap.set('n', '<leader>yf', '<cmd>let @+ = expand("%:t")<CR>',
+vim.keymap.set('n', '<leader>yf', '<cmd>let @+ = expand("%:t") . ":" . line(".")<CR>',
     { desc = 'copy current buffer file name (just file name)' })
 vim.keymap.set('n', '<leader>yF', '<cmd>let @+ = expand("%:p")<CR>',
     { desc = 'copy current buffer file name (full path)' })
