@@ -86,3 +86,6 @@ vim.keymap.set('n', '<C-l>', '20zl', { desc = 'Scroll right 20 chars' })
 vim.keymap.set('n', '<space>', 'a<space><esc>', { desc = 'Insert space in normale mode' })
 vim.keymap.set('n', '<leader>ws', '<cmd>SessionSearch<CR>', { desc = 'Session search' })
 vim.keymap.set('n', '<leader>wd', '<cmd>Autosession delete<CR>', { desc = 'Session search' })
+
+-- NOTE: build with <leader> + b
+vim.keymap.set('n', '<leader>b', '<cmd>make<CR>', { desc = "build with default command" })
