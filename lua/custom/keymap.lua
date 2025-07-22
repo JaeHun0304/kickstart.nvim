@@ -21,6 +21,7 @@ vim.keymap.set('n', '<leader>gn', '<cmd>Gitsigns next_hunk<CR>', { desc = 'Go to
 vim.keymap.set('n', '<leader>gp', '<cmd>Gitsigns prev_hunk<CR>', { desc = 'Go to prev git hunk' })
 vim.keymap.set('n', '<leader>gr', '<cmd>Gitsigns reset_hunk<CR>', { desc = 'Go to prev git hunk' })
 vim.keymap.set('n', '<leader>gi', '<cmd>Gitsigns preview_hunk_inline<CR>', { desc = 'Preview git hunk inline' })
+vim.keymap.set('n', '<leader>gd', '<cmd>Gvdiffsplit<CR>', { desc = "Do git diff in vertical split" })
 vim.keymap.set('n', '<leader>ng', '<cmd>Neogit<CR>', { desc = 'open neogit window' })
 vim.keymap.set('n', '<leader>do', '<cmd>DiffviewOpen<CR>', { desc = 'open diffview panel' })
 vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<CR>', { desc = 'close diffview panel' })

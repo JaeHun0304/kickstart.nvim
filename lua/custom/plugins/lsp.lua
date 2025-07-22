@@ -52,7 +52,6 @@ return {
                           "--background-index",
                           "--completion-style=detailed",
                           "--header-insertion=never",
-                          "--function-arg-placeholders=0",
                           "--clang-tidy",
                           -- add any other options you want
                     },  -- 🛠️ Use clangd symlink in ~/bin
