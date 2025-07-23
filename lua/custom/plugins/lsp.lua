@@ -32,7 +32,7 @@ return {
                     root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"), -- Find project root
                     capabilities = require('cmp_nvim_lsp').default_capabilities(),           -- (optional) if you use nvim-cmp
                 })
-            elseif string.find(hostname, "Mac.localdomain") then
+            elseif string.find(hostname, "Jaehuns%-Laptop") then
                 lspconfig.clangd.setup({
                     cmd = { "/opt/homebrew/opt/llvm/bin/clangd",
                           "--all-scopes-completion",
