@@ -24,8 +24,6 @@ return {
                           "--header-insertion=never",
                           "--function-arg-placeholders=0",
                           "--clang-tidy",
-                          "--limit-references=50",
-                          "--limit-results=100",
                           -- add any other options you want
                     },  -- 🛠️ Use clangd symlink in ~/bin
                     filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -40,7 +38,7 @@ return {
                           "--completion-style=detailed",
                           "--clang-tidy",
                           -- add any other options you want
-                    },  -- 🛠️ Use clangd symlink in ~/bin
+                    },
                     filetypes = { "c", "cpp", "objc", "objcpp" },
                     root_dir = lspconfig.util.root_pattern("compile_commands.json", ".git"), -- Find project root
                     capabilities = require('cmp_nvim_lsp').default_capabilities(),           -- (optional) if you use nvim-cmp
