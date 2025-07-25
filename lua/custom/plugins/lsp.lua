@@ -15,6 +15,22 @@ return {
             vim.lsp.set_log_level("off") -- Disable LSP log
             local hostname = vim.fn.hostname()
             local lspconfig = require('lspconfig')
+            lspconfig.lua_ls.setup({
+                runtime = {
+                    -- LuaJIT in the case of Neovim
+                    version = 'LuaJIT',
+                    path = vim.split(package.path, ';'),
+                },
+                diagnostics = {
+                    globals = {'vim'},
+                },
+                workspace = {
+                    library = vim.api.nvim_get_runtime_file("", true),
+                },
+                telemetry = {
+                    enable = false,
+                },
+            })
             if string.find(hostname, "atletx") then
                 lspconfig.clangd.setup({
                     cmd = { "/home/jaehjung/bin/clangd",
