@@ -116,13 +116,14 @@ return {
                         if cmp.visible() then
                             -- 1) menu open? confirm the selection
                             cmp.select_next_item()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
                         elseif has_words_before() then
                             -- 2) word before cursor? trigger the completion menu
                             cmp.complete()
+                        elseif luasnip.expand_or_jumpable() then
+                            -- 3) snippet can be triggered? trigger the snippet
+                            luasnip.expand_or_jump()
                         else
-                            -- 3) nothing else matched: do normal Tab (indent)
+                            -- 4) nothing else matched: do normal Tab (indent)
                             fallback()
                         end
                     end, { 'i', 's' }),

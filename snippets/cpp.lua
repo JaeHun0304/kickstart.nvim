@@ -8,7 +8,7 @@ local d = ls.dynamic_node       -- dynamic input field
 local sn = ls.snippet_node      -- another snippet node
 local fmt = require("luasnip.extras.fmt").fmt  -- format template
 local rep = require("luasnip.extras").rep      -- repeat previous input
-local function create_cout_args(args, snip)
+local function create_cout_args(_, snip)
     local nodes = {}
     local count = tonumber(snip.captures[1]) or 0
     for j = 1, count do
@@ -51,11 +51,26 @@ return {
         std::cout << {} << '\n';
     ]], { i(1, "message") })),
 
+    -- cout with ' '
+    s("cout'", fmt([[
+        std::cout << {} << ' ';
+    ]], { i(1, "message") })),
+
+    s("nl", t("std::cout << '\\n';")),
+
+    s("print ", fmt([[
+        printf("{}");
+    ]], { i(1, "msg") })),
+
+    s({trig="vg ([xlmcC]_%S+) ", regTrig=true}, fmt([[
+        , vget({})
+    ]], { f(capture_first) })),
+
     s({trig="cout(%d+)", regTrig=true}, fmt([[
         std::cout << {} << '\n';
     ]], { d(1, create_cout_args, {}, { user_args = nil})})),
 
-    s({trig="([xlmcC]_%w+%s)", regTrig=true}, fmt([[
+    s({trig="([xlmcC]_%S+)%s", regTrig=true}, fmt([[
         " {}:" << {} << 
     ]], { f(capture_first), f(capture_first) })),
 
@@ -64,11 +79,18 @@ return {
     ]], { f(cout_with_vars) })),
 
     -- For loop
-    s({trig="for([ijkl]),(%S+)%s", regTrig=true}, fmt([[
+    s({trig="for([ijkl])%((%S+)%)", regTrig=true}, fmt([[
         for (int {} = 0; {} < {}; ++{}) {{
             // code
         }}
     ]], { f(capture_first), f(capture_first), f(capture_second), f(capture_first) })),
+    
+    -- For loop with range
+    s({trig="for%((%S+)%)", regTrig=true}, fmt([[
+        for (const auto &elem : {}) {{
+            // code
+        }}
+    ]], { f(capture_first) })),
 
     -- Include guard
     s("ifndef", fmt([[
