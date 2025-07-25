@@ -70,7 +70,7 @@ return {
         std::cout << {} << '\n';
     ]], { d(1, create_cout_args, {}, { user_args = nil})})),
 
-    s({trig="([xlmcC]_%S+)%s", regTrig=true}, fmt([[
+    s({trig="([xlmcC]_[%w_-]+)%s", regTrig=true}, fmt([[
         " {}:" << {} << 
     ]], { f(capture_first), f(capture_first) })),
 
@@ -80,10 +80,10 @@ return {
 
     -- For loop
     s({trig="for([ijkl])%((%S+)%)", regTrig=true}, fmt([[
-        for (int {} = 0; {} < {}; ++{}) {{
-            // code
+        for (unsigned {} = 0; {} < {}; ++{}) {{
+            {}
         }}
-    ]], { f(capture_first), f(capture_first), f(capture_second), f(capture_first) })),
+    ]], { f(capture_first), f(capture_first), f(capture_second), f(capture_first), i(1, "code") })),
     
     -- For loop with range
     s({trig="for%((%S+)%)", regTrig=true}, fmt([[
