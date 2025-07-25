@@ -116,6 +116,8 @@ return {
                         if cmp.visible() then
                             -- 1) menu open? confirm the selection
                             cmp.select_next_item()
+                        elseif luasnip.expand_or_jumpable() then
+                            luasnip.expand_or_jump()
                         elseif has_words_before() then
                             -- 2) word before cursor? trigger the completion menu
                             cmp.complete()
@@ -128,12 +130,14 @@ return {
                     ['<S-Tab>'] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
+                        elseif luasnip.jumpable(-1) then
+                            luasnip.jump(-1)
                         else
                             fallback()
                         end
                     end, { 'i', 's' }),
                     -- <CR> to confirm completion
-                    ['<CR>'] = cmp.mapping.confirm { select = false },
+                    ['<CR>'] = cmp.mapping.confirm { select = true },
                     -- <Esc> to close completion
                     ['<Esc>'] = cmp.mapping.close(),    -- just closes the menu
                     -- Manually trigger a completion from nvim-cmp.
