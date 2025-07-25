@@ -79,7 +79,7 @@ return {
     ]], { f(cout_with_vars) })),
 
     -- For loop
-    s({trig="for([ijkl])%((%S+)%)", regTrig=true}, fmt([[
+    s({trig="for%(([%w_-]+)%)%((%S+)%)", regTrig=true}, fmt([[
         for (unsigned {} = 0; {} < {}; ++{}) {{
             {}
         }}
