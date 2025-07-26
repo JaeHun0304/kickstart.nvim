@@ -46,6 +46,13 @@ return {
         }}
     ]], { i(1, "// code") })),
 
+    -- for loop with i as index
+    s("fori", fmt([[
+        for (unsigned i = 0; i < {}; ++i) {{
+            {}
+        }}
+    ]], { i(1, "range"), i(2, "code"), })),
+
     -- cout with '\n'
     s("coutn", fmt([[
         std::cout << {} << '\n';
@@ -101,4 +108,8 @@ return {
 
         #endif // {}
     ]], { i(1, "HEADER_H"), rep(1), i(2, "// content"), rep(1) })),
+
+    s({trig="inc_(%w+) ", wordTrig=false, regTrig=true}, fmt([[
+        #include <{}>
+    ]], { f(capture_first) })),
 }
