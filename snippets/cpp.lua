@@ -69,7 +69,7 @@ return {
         printf("{}");
     ]], { i(1, "msg") })),
 
-    s({trig="vg ([xlmcC]_%S+) ", regTrig=true}, fmt([[
+    s({trig="vg ([xlmcC]_[%w_]+)", regTrig=true}, fmt([[
         , vget({})
     ]], { f(capture_first) })),
 
@@ -91,7 +91,7 @@ return {
             {}
         }}
     ]], { f(capture_first), f(capture_first), f(capture_second), f(capture_first), i(1, "code") })),
-    
+
     -- For loop with range
     s({trig="for%((%S+)%)", regTrig=true}, fmt([[
         for (const auto &elem : {}) {{
@@ -109,7 +109,7 @@ return {
         #endif // {}
     ]], { i(1, "HEADER_H"), rep(1), i(2, "// content"), rep(1) })),
 
-    s({trig="inc_(%w+) ", wordTrig=false, regTrig=true}, fmt([[
+    s({trig="inc_(%w+)", wordTrig=false, regTrig=true}, fmt([[
         #include <{}>
     ]], { f(capture_first) })),
 }
