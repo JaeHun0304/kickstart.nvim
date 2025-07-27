@@ -122,9 +122,6 @@ return {
                         elseif has_words_before() then
                             -- 2) word before cursor? trigger the completion menu
                             cmp.complete()
-                        elseif luasnip.expand_or_jumpable() then
-                            -- 3) snippet can be triggered? trigger the snippet
-                            luasnip.expand_or_jump()
                         else
                             -- 4) nothing else matched: do normal Tab (indent)
                             fallback()
