@@ -52,6 +52,20 @@ return {
             {}
         }}
     ]], { i(1, "range"), i(2, "code"), })),
+    
+    -- for loop with j as index
+    s("forj", fmt([[
+        for (unsigned i = 0; i < {}; ++i) {{
+            {}
+        }}
+    ]], { i(1, "range"), i(2, "code"), })),
+    
+    -- for loop with k as index
+    s("fork", fmt([[
+        for (unsigned i = 0; i < {}; ++i) {{
+            {}
+        }}
+    ]], { i(1, "range"), i(2, "code"), })),
 
     -- cout with '\n'
     s("coutn", fmt([[
