@@ -95,9 +95,9 @@ return {
     -- For loop with range
     s({trig="for%((%S+)%)", regTrig=true}, fmt([[
         for (const auto &elem : {}) {{
-            // code
+            {}
         }}
-    ]], { f(capture_first) })),
+    ]], { f(capture_first), i(1, "code") })),
 
     -- Include guard
     s("ifndef", fmt([[
