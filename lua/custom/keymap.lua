@@ -90,7 +90,3 @@ vim.keymap.set('n', '<leader>wd', '<cmd>Autosession delete<CR>', { desc = 'Sessi
 
 -- NOTE: build with <leader> + b
 vim.keymap.set('n', '<leader>b', '<cmd>make<CR>', { desc = "build with default command" })
-
-vim.keymap.set("i", "<C-e>", function()
-    require("luasnip").expand()
-end, { desc = "Expand Luasnip snippet", silent = true })
