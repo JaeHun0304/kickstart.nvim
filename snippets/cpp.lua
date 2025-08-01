@@ -8,33 +8,8 @@ local d = ls.dynamic_node       -- dynamic input field
 local sn = ls.snippet_node      -- another snippet node
 local fmt = require("luasnip.extras.fmt").fmt  -- format template
 local rep = require("luasnip.extras").rep      -- repeat previous input
-local function create_cout_args(_, snip)
-    local nodes = {}
-    local count = tonumber(snip.captures[1]) or 0
-    for j = 1, count do
-        table.insert(nodes, i(j, "arg" .. j))
-        if j < count then
-            table.insert(nodes, t(" << "))
-        end
-    end
-    return sn(nil, nodes)
-end
 local function capture_first(_, snip)
     return snip.captures[1]
-end
-local function capture_second(_, snip)
-    return snip.captures[2]
-end
-local function cout_with_vars(_, snip)
-    local args = snip.captures[2]
-    local words = {}
-
-    for word in string.gmatch(args, "[%w_]+") do
-        table.insert(words, string.format("\" %s:\" << %s", word, word))
-    end
-    table.insert(words, 1, string.format("\"%s:\" << %s", snip.captures[1], snip.captures[1]))
-
-    return table.concat(words, " << ")
 end
 
 return {
@@ -55,14 +30,14 @@ return {
     
     -- for loop with j as index
     s("forj", fmt([[
-        for (unsigned i = 0; i < {}; ++i) {{
+        for (unsigned j = 0; j < {}; ++j) {{
             {}
         }}
     ]], { i(1, "range"), i(2, "code"), })),
     
     -- for loop with k as index
     s("fork", fmt([[
-        for (unsigned i = 0; i < {}; ++i) {{
+        for (unsigned k = 0; k < {}; ++k) {{
             {}
         }}
     ]], { i(1, "range"), i(2, "code"), })),
@@ -79,32 +54,9 @@ return {
 
     s("nl", t("std::cout << '\\n';")),
 
-    s("print ", fmt([[
-        printf("{}");
-    ]], { i(1, "msg") })),
-
     s({trig="vg ([xlmcC]_[%w_]+)", regTrig=true}, fmt([[
         , vget({})
     ]], { f(capture_first) })),
-
-    s({trig="cout(%d+)", regTrig=true}, fmt([[
-        std::cout << {} << '\n';
-    ]], { d(1, create_cout_args, {}, { user_args = nil})})),
-
-    s({trig="([xlmcC]_[%w_-]+)%s", regTrig=true}, fmt([[
-        " {}:" << {} << 
-    ]], { f(capture_first), f(capture_first) })),
-
-    s({trig="cout%(([%w_]+),?([%w_,]*)%)", regTrig=true}, fmt([[
-        std::cout << {} << '\n';
-    ]], { f(cout_with_vars) })),
-
-    -- For loop
-    s({trig="for%(([%w_-]+)%)%((%S+)%)", regTrig=true}, fmt([[
-        for (unsigned {} = 0; {} < {}; ++{}) {{
-            {}
-        }}
-    ]], { f(capture_first), f(capture_first), f(capture_second), f(capture_first), i(1, "code") })),
 
     -- For loop with range
     s({trig="for%((%S+)%)", regTrig=true}, fmt([[
