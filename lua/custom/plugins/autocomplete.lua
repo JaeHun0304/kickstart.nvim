@@ -116,16 +116,17 @@ return {
                         if cmp.visible() then
                             -- 1) menu open? confirm the selection
                             cmp.select_next_item()
-                        elseif luasnip.expand_or_locally_jumpable() and has_words_before() then
-                            -- 2) snippet can be triggered? trigger the snippet
-                            luasnip.expand_or_jump()
                         elseif has_words_before() then
-                            -- 3) word before cursor? trigger the completion menu
+                            -- 2) word before cursor? trigger the completion menu
                             cmp.complete()
                         else
-                            -- 4) nothing else matched: do normal Tab (indent)
+                            -- 3) nothing else matched: do normal Tab (indent)
                             fallback()
                         end
+                    end, { 'i', 's' }),
+
+                    ['<C-e>'] = cmp.mapping(function()
+                        luasnip.expand_or_jump()
                     end, { 'i', 's' }),
 
                     ['<S-Tab>'] = cmp.mapping(function(fallback)
