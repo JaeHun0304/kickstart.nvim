@@ -82,7 +82,7 @@ return {
                         "--column",
                         "--smart-case",
                     },
-                    file_ignore_patterns = {".git/", ".cache/","%.o", "%.d", "%.gz", "%.xz", "%.stdout", "%.retire"}
+                    file_ignore_patterns = {".git/", ".svn/", ".cache/", "%.o", "%.d", "%.gz", "%.xz", "%.stdout", "%.retire"}
                 },
 
                 extensions = {

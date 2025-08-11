@@ -39,10 +39,7 @@ return {
 
             lldb:toggle()
         end
-
-        vim.api.nvim_set_keymap("n", "<leader>l", "<cmd>lua _LLDB_TOGGLE()<CR>", { noremap = true, silent = true })
+        -- Custom command to invoke lldb in float term
+        vim.api.nvim_create_user_command('Lldb', function() _LLDB_TOGGLE() end, {})
     end,
-    keys = {
-        { "<leader>l", "<cmd>lua _LLDB_TOGGLE()<CR>", desc = "Toggle LLDB with current binary" }
-    },
 }

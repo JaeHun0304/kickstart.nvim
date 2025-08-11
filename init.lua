@@ -5,5 +5,5 @@ end
 
 load('custom.setting')
 load('custom.keymap')
-load('custom.state_dirs')
+-- load('custom.state_dirs')
 require("lazy_config")

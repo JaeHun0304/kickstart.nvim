@@ -13,6 +13,12 @@ local function capture_first(_, snip)
 end
 
 return {
+    -- debug print
+    s("debug", fmt([[
+        if (c_Component::isDebugEnabled()) {{
+            std::cout << simClock() << ":{}" << '\n';
+        }}
+    ]], { i(1, "msg") })),
     -- Main function
     s("main", fmt([[
         int main(int argc, char* argv[]) {{

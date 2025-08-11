@@ -133,6 +133,10 @@ vim.opt.completeopt = 'menu,menuone,noselect'
 vim.o.grepprg = "rg --vimgrep --smart-case --color=never"
 vim.o.grepformat = "%f:%l:%c:%m"
 
+-- Disable swap/backup file for nvim
+vim.o.swapfile = false
+vim.o.undofile = false
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
