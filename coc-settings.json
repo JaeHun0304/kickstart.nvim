@@ -1,4 +1,27 @@
 {
   "clangd.arguments": ["--background-index", "--header-insertion=never", "--clang-tidy"],
-  "clangd.fallbackFlags": ["-std=c++23"]
+  "clangd.fallbackFlags": ["-std=c++23"],
+  "Lua": {
+    "runtime": {
+      "version": "LuaJIT",
+      "path": [
+        "?.lua",
+        "?/init.lua"
+      ]
+    },
+    "diagnostics": {
+      "globals": ["vim"]
+    },
+    "workspace": {
+      "library": [
+        "${3rd}/luv/library",
+        "/usr/share/nvim/runtime/lua",
+        "/usr/share/nvim/runtime/lua/vim",
+        "/usr/share/nvim/runtime/lua/vim/lsp"
+      ]
+    },
+    "telemetry": {
+      "enable": false
+    }
+  }
 }

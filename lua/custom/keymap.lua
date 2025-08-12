@@ -30,9 +30,9 @@ vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<CR>', { desc = 'close diff
 vim.keymap.set('n', 'Y', '^y$', { desc = 'Copy whole line without \n' })
 
 -- NOTE: Open lsp definitions in split
-vim.keymap.set('n', 'gv', '<cmd> vsplit | lua vim.lsp.buf.definition()<CR>', { desc = 'Open LSP definition on vsplit' })
-vim.keymap.set('n', 'gs', '<cmd> belowright split | lua vim.lsp.buf.definition()<CR>',
-    { desc = 'Open LSP definition on split' })
+vim.keymap.set('n', 'gv', function()
+    vim.cmd('vert call CocActionAsync("jumpDefinition")')
+end, { desc = 'CoC - Open LSP definition on vsplit' })
 
 -- NOTE: abbreviate "vert sb" into vsb
 vim.cmd 'cnorea vsb vert sb'
