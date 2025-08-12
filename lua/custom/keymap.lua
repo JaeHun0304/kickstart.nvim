@@ -31,8 +31,8 @@ vim.keymap.set('n', 'Y', '^y$', { desc = 'Copy whole line without \n' })
 
 -- NOTE: Open lsp definitions in split
 vim.keymap.set('n', 'gv', function()
-    vim.cmd('vert call CocActionAsync("jumpDefinition")')
-end, { desc = 'CoC - Open LSP definition on vsplit' })
+  vim.cmd('vsp | call CocActionAsync("jumpDefinition")')
+end, { noremap = true, silent = true })
 
 -- NOTE: abbreviate "vert sb" into vsb
 vim.cmd 'cnorea vsb vert sb'
