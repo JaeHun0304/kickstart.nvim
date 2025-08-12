@@ -18,6 +18,18 @@ return {
             -- No keymaps here
           end
         })
+        require('diffview').setup({
+          -- Optional: Enhance the diff view with more colors
+          enhanced_diff_hl = true,
+
+          -- Other optional configurations
+          view = {
+            merge_tool = {
+              layout = "diff3_mixed",
+              disable_diagnostics = true,  -- Temporarily disable diagnostics for conflict buffers
+            },
+          },
+        })
       end
     }
 }
