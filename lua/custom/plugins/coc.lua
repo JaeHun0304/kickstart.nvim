@@ -48,10 +48,10 @@ return {
     keyset("n", "]g", "<Plug>(coc-diagnostic-next)", { silent = true })
 
     -- GoTo code navigation
-    keyset("n", "gd", "<Plug>(coc-definition)", { silent = true })
+    keyset("n", "gd", "<cmd>Telescope coc definitions<CR>", { silent = true })
     keyset("n", "gy", "<Plug>(coc-type-definition)", { silent = true })
     keyset("n", "gi", "<Plug>(coc-implementation)", { silent = true })
-    keyset("n", "gr", "<Plug>(coc-references)", { silent = true })
+    keyset("n", "gr", "<cmd>Telescope coc references<CR>", { silent = true })
 
     -- Use K to show documentation in preview window
     function _G.show_docs()
@@ -170,7 +170,7 @@ return {
     -- Find symbol of current document
     keyset("n", "<space>o", ":<C-u>CocList outline<cr>", opts)
     -- Search workspace symbols
-    keyset("n", "<space>s", ":<C-u>CocList -I symbols<cr>", opts)
+    keyset("n", "<space>s", ":<cmd>Telescope coc workspace_symbols<CR>", opts)
     -- Do default action for next item
     keyset("n", "<space>j", ":<C-u>CocNext<cr>", opts)
     -- Do default action for previous item

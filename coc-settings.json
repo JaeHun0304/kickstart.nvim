@@ -1,7 +1,7 @@
 {
   "clangd.arguments": ["--background-index", "--header-insertion=never", "--clang-tidy"],
   "clangd.fallbackFlags": ["-std=c++23"],
-  "Lua": {
+  "lua": {
     "runtime": {
       "version": "LuaJIT",
       "path": [
