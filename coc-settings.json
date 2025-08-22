@@ -1,5 +1,5 @@
 {
-  "clangd.arguments": ["--background-index", "--header-insertion=never", "--clang-tidy"],
+  "clangd.arguments": ["--background-index=false", "--header-insertion=never", "--clang-tidy"],
   "clangd.fallbackFlags": ["-std=c++23"],
   "lua": {
     "runtime": {

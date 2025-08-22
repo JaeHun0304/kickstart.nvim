@@ -2,6 +2,7 @@
 return {
   "neoclide/coc.nvim", 
   branch = "release",
+  run = 'yarn install --frozen-lockfile',
   config = function()
     -- https://raw.githubusercontent.com/neoclide/coc.nvim/master/doc/coc-example-config.lua
 
