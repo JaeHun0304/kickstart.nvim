@@ -8,7 +8,7 @@ return {
     -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
     { -- Fuzzy Finder (files, lsp, etc)
-        'nvim-telescope/telescope.nvim',
+        'nvim-telescope/telescope.nvim',tag='0.1.8',
         event = 'VimEnter',
         -- Pull in rolling release for now. Once settled, try new stable version later
         -- branch = '0.1.x',
