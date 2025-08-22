@@ -29,11 +29,6 @@ vim.keymap.set('n', '<leader>gh', '<cmd>DiffviewFileHistory<CR>', { desc = 'open
 -- NOTE: Copy line without \n with key 'Y'
 vim.keymap.set('n', 'Y', '^y$', { desc = 'Copy whole line without \n' })
 
--- NOTE: Open lsp definitions in split
-vim.keymap.set('n', 'gv', function()
-  vim.cmd('vsp | call CocActionAsync("jumpDefinition")')
-end, { noremap = true, silent = true })
-
 -- NOTE: abbreviate "vert sb" into vsb
 vim.cmd 'cnorea vsb vert sb'
 
