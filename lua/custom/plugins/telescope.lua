@@ -13,7 +13,6 @@ return {
         -- Pull in rolling release for now. Once settled, try new stable version later
         -- branch = '0.1.x',
         dependencies = {
-            'fannheyward/telescope-coc.nvim',
             'nvim-lua/plenary.nvim',
             'junegunn/fzf',
             { -- If encountering errors, see telescope-fzf-native README for installation instructions
