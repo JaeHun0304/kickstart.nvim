@@ -1,5 +1,11 @@
 {
   "clangd.arguments": ["--background-index=false", "--header-insertion=never", "--clang-tidy"],
+  "snippets.ultisnips.directories": [
+    "~/.config/nvim/snippets"  // ← your custom snippet folder
+  ],
+  "snippets.snipmate.enable":false,
+  "snippets.ultisnips.pythonPrompt": false,
+  "inlayHint.enable": false,
   "clangd.fallbackFlags": ["-std=c++23"],
   "lua": {
     "runtime": {
