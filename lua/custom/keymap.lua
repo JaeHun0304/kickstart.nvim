@@ -69,9 +69,11 @@ vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', { desc = 'Save buffer' })
 vim.keymap.set({ 'n', 't' }, '<leader>t', '<cmd>ToggleTerm direction=horizontal size=15<cr>',
     { desc = 'Toggleterm on vertical' })
 
--- NOTE: scroll left and right with 20 chars
-vim.keymap.set('n', '<C-h>', '20zh', { desc = 'Scroll left 20 chars' })
-vim.keymap.set('n', '<C-l>', '20zl', { desc = 'Scroll right 20 chars' })
+-- NOTE: Move windows with C-hjkl
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'move cursor to left window' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'move cursor to right window' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'move cursor to lower window'})
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'move cursor to upper window'})
 
 -- NOTE: insert space in normal mode with <space>
 vim.keymap.set('n', '<space>', 'a<space><esc>', { desc = 'Insert space in normale mode' })
