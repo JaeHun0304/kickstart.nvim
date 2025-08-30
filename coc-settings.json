@@ -9,7 +9,7 @@
   "clangd.fallbackFlags": ["-std=c++23"],
   "languageserver": {
     "lua": {
-      "command": "/home/jaehjung/bin/lua-language-server",
+      "command": "lua-language-server",
       "args": ["-E"],
       "filetypes": ["lua"],
       "settings": {
