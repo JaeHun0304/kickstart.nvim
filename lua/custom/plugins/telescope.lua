@@ -15,6 +15,7 @@ return {
         dependencies = {
             'nvim-lua/plenary.nvim',
             'junegunn/fzf',
+            'fannheyward/telescope-coc.nvim',
             { -- If encountering errors, see telescope-fzf-native README for installation instructions
                 'nvim-telescope/telescope-fzf-native.nvim',
 

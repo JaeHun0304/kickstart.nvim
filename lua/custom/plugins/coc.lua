@@ -49,12 +49,12 @@ return {
     keyset("n", "]g", "<Plug>(coc-diagnostic-next)", { silent = true })
 
     -- GoTo code navigation
-    keyset("n", "gd", "<Plug>(coc-definition)", { silent = true })
+    keyset("n", "gd", "<cmd>Telescope coc definitions<CR>", { silent = true })
     keyset("n", "gs", ":call CocAction('jumpDefinition', 'split')<CR>", { silent = true})
     keyset("n", "gv", ":call CocAction('jumpDefinition', 'vsplit')<CR>", { silent = true})
-    keyset("n", "gy", "<Plug>(coc-type-definition)", { silent = true })
-    keyset("n", "gi", "<Plug>(coc-implementation)", { silent = true })
-    keyset("n", "gr", "<Plug>(coc-references)", { silent = true })
+    keyset("n", "gy", "<cmd>Telescope coc type_definitions<CR>", { silent = true })
+    keyset("n", "gi", "<cmd>Telescope coc implementations<CR>", { silent = true })
+    keyset("n", "gr", "<cmd>Telescope coc references<CR>", { silent = true })
 
     -- Use K to show documentation in preview window
     function _G.show_docs()
@@ -165,7 +165,7 @@ return {
     ---@diagnostic disable-next-line: redefined-local
     local opts = { silent = true, nowait = true }
     -- Show all diagnostics
-    keyset("n", "<space>a", ":<C-u>CocList diagnostics<cr>", opts)
+    keyset("n", "<space>a", "<cmd>Telescope coc diagnostics<CR>", opts)
     -- Manage extensions
     keyset("n", "<space>e", ":<C-u>CocList extensions<cr>", opts)
     -- Show commands
@@ -173,7 +173,7 @@ return {
     -- Find symbol of current document
     keyset("n", "<space>o", ":<C-u>CocList outline<cr>", opts)
     -- Search workspace symbols
-    keyset("n", "<leader>lw", ":<C-u>CocList symbols<cr>", opts)
+    keyset("n", "<leader>lw", "<cmd>Telescope coc workspace_symbols<cr>", opts)
     -- Do default action for next item
     keyset("n", "<space>j", ":<C-u>CocNext<cr>", opts)
     -- Do default action for previous item
