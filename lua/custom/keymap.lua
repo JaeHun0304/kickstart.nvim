@@ -66,7 +66,7 @@ vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>', { desc = 'Select
 -- NOTE: Commands
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', { desc = 'Save buffer' })
 -- NOTE: ToggleTerm shortcut
-vim.keymap.set({ 'n', 't' }, '<leader>t', '<cmd>ToggleTerm direction=horizontal size=15<cr>',
+vim.keymap.set({ 'n', 't' }, '<leader>t', '<cmd>ToggleTerm direction=float<cr>',
     { desc = 'Toggleterm on vertical' })
 
 -- NOTE: Move windows with C-hjkl
