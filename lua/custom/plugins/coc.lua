@@ -49,7 +49,7 @@ return {
     keyset("n", "]g", "<Plug>(coc-diagnostic-next)", { silent = true })
 
     -- GoTo code navigation
-    keyset("n", "gd", "<cmd>Telescope coc definitions<CR>", { silent = true })
+    keyset("n", "gd", ":call CocAction('jumpDefinition')<CR>", { silent = true })
     keyset("n", "gs", ":call CocAction('jumpDefinition', 'split')<CR>", { silent = true})
     keyset("n", "gv", ":call CocAction('jumpDefinition', 'vsplit')<CR>", { silent = true})
     keyset("n", "gy", "<cmd>Telescope coc type_definitions<CR>", { silent = true })

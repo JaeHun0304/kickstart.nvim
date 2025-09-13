@@ -1,5 +1,5 @@
 {
-  "clangd.arguments": ["--header-insertion=never", "--clang-tidy"],
+  "clangd.arguments": ["--background-index=false", "--header-insertion=never", "--clang-tidy"],
   "snippets.ultisnips.directories": [
     "~/.config/nvim/snippets"  // ← your custom snippet folder
   ],
