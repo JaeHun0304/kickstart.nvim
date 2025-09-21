@@ -41,5 +41,7 @@ return {
         end
         -- Custom command to invoke lldb in float term
         vim.api.nvim_create_user_command('Lldb', function() _LLDB_TOGGLE() end, {})
+        -- LLDB toggle keymap
+        vim.keymap.set('n', '<space>r', '<cmd>Lldb<cr>', { desc = 'Toggle LLDB' })
     end,
 }
