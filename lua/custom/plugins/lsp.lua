@@ -11,13 +11,42 @@ return {
       local lspconfig = require('lspconfig')
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+      local function setup_lsp_document_highlight(client, bufnr)
+        if not client.server_capabilities.documentHighlightProvider then
+          return
+        end
+
+        -- Unique augroup per buffer to avoid collisions on reattach
+        local group = vim.api.nvim_create_augroup("lsp_document_highlight_" .. bufnr, { clear = true })
+
+        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+          group = group,
+          buffer = bufnr,
+          callback = vim.lsp.buf.document_highlight,
+          desc = "LSP: highlight symbol references under cursor",
+        })
+
+        vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+          group = group,
+          buffer = bufnr,
+          callback = vim.lsp.buf.clear_references,
+          desc = "LSP: clear symbol reference highlights",
+        })
+      end
+
+      local function on_attach(client, bufnr)
+        setup_lsp_document_highlight(client, bufnr)
+      end
+
       -- C++ LSP (clangd) - your .clangd file handles the configuration
       lspconfig.clangd.setup {
+        on_attach = on_attach,
         capabilities = capabilities,
       }
 
       -- Lua LSP (lua_ls) - configured for Neovim development
       lspconfig.lua_ls.setup {
+        on_attach = on_attach,
         capabilities = capabilities,
         settings = {
           Lua = {
@@ -94,11 +123,10 @@ return {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
           local opts = { buffer = ev.buf }
-          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
           vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-          vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+          -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
           vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-          vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
           vim.keymap.set('n', '<space>f', function()
             vim.lsp.buf.format { async = true }
           end, opts)
@@ -198,4 +226,13 @@ return {
     version = 'v2.*',
     build = 'make install_jsregexp',
   },
+
+  -- lspsaga.nvim
+  {
+    'nvimdev/lspsaga.nvim',
+    config = function()
+      require('lspsaga').setup({})
+    end,
+    vim.keymap.set("n", "gpd", "<cmd>Lspsaga peek_definition<CR>", { desc = "LSP: Peek definition" })
+  }
 }
