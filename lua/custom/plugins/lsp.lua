@@ -231,8 +231,13 @@ return {
   {
     'nvimdev/lspsaga.nvim',
     config = function()
-      require('lspsaga').setup({})
+      require('lspsaga').setup({ 
+        lightbulb = {
+          enable = false,
+        },
+      })
     end,
-    vim.keymap.set("n", "gpd", "<cmd>Lspsaga peek_definition<CR>", { desc = "LSP: Peek definition" })
-  }
+    vim.keymap.set("n", "gpd", "<cmd>Lspsaga peek_definition<CR>", { desc = "LSP: Peek definition" }),
+    vim.keymap.set({ 'n', 't' }, '<leader>t', '<cmd>Lspsaga term_toggle<cr>', { desc = "LSP: Toggle float term" }),
+  },
 }
