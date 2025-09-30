@@ -8,7 +8,6 @@ return {
       'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
-      local lspconfig = require('lspconfig')
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       local function setup_lsp_document_highlight(client, bufnr)
@@ -39,13 +38,14 @@ return {
       end
 
       -- C++ LSP (clangd) - your .clangd file handles the configuration
-      lspconfig.clangd.setup {
+      vim.lsp.config('clangd', {
         on_attach = on_attach,
         capabilities = capabilities,
-      }
+      })
+      vim.lsp.enable('clangd')
 
       -- Lua LSP (lua_ls) - configured for Neovim development
-      lspconfig.lua_ls.setup {
+      vim.lsp.config('lua_ls', {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
@@ -74,7 +74,8 @@ return {
             },
           },
         },
-      }
+      })
+      vim.lsp.enable('lua_ls')
 
       -- LSP keymaps
       vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -216,6 +217,23 @@ return {
           { name = 'luasnip' },
           { name = 'buffer' },
         }
+      })
+    end,
+  },
+
+  -- Install lsp using mason
+  {
+  "williamboman/mason.nvim",
+  build = ":MasonUpdate",
+  config = function() require("mason").setup() end,
+  },
+
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "mason.nvim", "neovim/nvim-lspconfig" },
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "clangd" },
       })
     end,
   },
