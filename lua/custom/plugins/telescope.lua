@@ -8,7 +8,7 @@ return {
     -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
     { -- Fuzzy Finder (files, lsp, etc)
-        'nvim-telescope/telescope.nvim',tag='0.1.8',
+        'nvim-telescope/telescope.nvim',
         event = 'VimEnter',
         -- Pull in rolling release for now. Once settled, try new stable version later
         -- branch = '0.1.x',
@@ -86,6 +86,14 @@ return {
                     file_ignore_patterns = {".git/", ".svn/", ".cache/", "%.o", "%.d", "%.gz", "%.xz", "%.stdout", "%.retire"}
                 },
 
+                pickers = {
+                    find_files = {
+                        hidden = true,
+                        no_ignore = true,
+                        find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
+                    },
+                },
+
                 extensions = {
                     ['ui-select'] = {
                         require('telescope.themes').get_dropdown(),
@@ -120,7 +128,7 @@ return {
             local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
             vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
             vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-            vim.keymap.set('n', '<leader>sf', function() builtin.find_files({ no_ignore = true, hidden = true }) end,
+            vim.keymap.set('n', '<leader>sf', builtin.find_files,
                 { desc = '[S]earch [F]iles' })
             vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
             vim.keymap.set('n', '<leader>sw', live_grep_args_shortcuts.grep_word_under_cursor,
@@ -172,6 +180,8 @@ return {
                     expand_dir = false,
                 }
             end, { desc = 'Telescope git_status for changed files' })
+
+            vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = 'Telescope git_commits log history' })
 
             -- It's also possible to pass additional configuration options.
             --  See `:help telescope.builtin.live_grep()` for information about particular keys
