@@ -39,7 +39,7 @@ return {
 
       -- C++ LSP (clangd) - your .clangd file handles the configuration
       vim.lsp.config('clangd', {
-        cmd = { "clangd", "--header-insertion=never" },
+        cmd = { "clangd", "--header-insertion=never", "--log=error" },
         on_attach = on_attach,
         capabilities = capabilities,
       })
