@@ -12,6 +12,13 @@ return {
             -- invoke `progress` here.
             return lsp_progress.progress()
           end,
+          {
+            "filename",
+            path = 2,
+            file_status = true,
+            newfile_status = true,
+            symbols = { modified = " [+]", readonly = " [-]", unnamed = "[No Name]"}
+          }
         },
       },
     })

@@ -39,7 +39,7 @@ return {
 
       -- C++ LSP (clangd) - your .clangd file handles the configuration
       vim.lsp.config('clangd', {
-        cmd = { "clangd", "--header-insertion=never", "--log=error" },
+        cmd = { "clangd", "--header-insertion=never", "--pch-storage=disk" },
         on_attach = on_attach,
         capabilities = capabilities,
       })
@@ -125,10 +125,10 @@ return {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
           local opts = { buffer = ev.buf }
-          -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
           vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
           -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-          vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+          vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
           vim.keymap.set('n', '<space>f', function()
             vim.lsp.buf.format { async = true }
           end, opts)
