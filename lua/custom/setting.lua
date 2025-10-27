@@ -164,12 +164,3 @@ vim.api.nvim_create_user_command(
     {}
 )
 
--- Detach all LSP clients in Diffview side panels
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "DiffviewFiles", "DiffviewFileHistory" },
-    callback = function(args)
-      for _, client in pairs(vim.lsp.get_clients { bufnr = args.buf }) do
-        vim.lsp.buf_detach_client(args.buf, client.id)
-      end
-    end,
-})

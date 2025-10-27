@@ -37,11 +37,18 @@ return {
         setup_lsp_document_highlight(client, bufnr)
       end
 
+      local caps = vim.lsp.protocol.make_client_capabilities()
+      caps.textDocument.foldingRange = nil
+
       -- C++ LSP (clangd) - your .clangd file handles the configuration
       vim.lsp.config('clangd', {
         cmd = { "clangd", "--header-insertion=never", "--pch-storage=disk" },
         on_attach = on_attach,
-        capabilities = capabilities,
+        capabilities = caps,
+        on_init = function(client)
+          -- Belt-and-suspenders: tell Neovim that this client doesn't provide folds
+          client.server_capabilities.foldingRangeProvider = false
+        end,
       })
       vim.lsp.enable('clangd')
 
