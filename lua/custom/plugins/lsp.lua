@@ -40,9 +40,13 @@ return {
       local caps = vim.lsp.protocol.make_client_capabilities()
       caps.textDocument.foldingRange = nil
 
+      local clangd_path = vim.fn.stdpath("data") .. "/mason/bin/clangd"
+      if vim.fn.hostname():match("atletx7") or vim.fn.hostname():match("atlvibex") then
+        clangd_path = "/tool/pandora64/.package/llvm-20.1.7-gcc1020/bin/clangd"
+      end
       -- C++ LSP (clangd) - your .clangd file handles the configuration
       vim.lsp.config('clangd', {
-        cmd = { "clangd", "--header-insertion=never", "--pch-storage=disk" },
+        cmd = { clangd_path, "--header-insertion=never", "--pch-storage=disk" },
         on_attach = on_attach,
         capabilities = caps,
         on_init = function(client)
