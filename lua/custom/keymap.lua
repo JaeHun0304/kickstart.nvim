@@ -32,9 +32,6 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<leader>h', '^', { desc = 'Go to first non-bl
 vim.keymap.set({ 'n', 'x', 'o' }, '<leader>l', 'g_', { desc = 'Go to last non-blank character of the line' })
 vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>', { desc = 'Select all text in buffer' })
 
--- NOTE: Commands
-vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', { desc = 'Save buffer' })
-
 -- NOTE: Move windows with C-hjkl
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'move cursor to left window' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'move cursor to right window' })

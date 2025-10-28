@@ -9,6 +9,7 @@ return {
         ---@type AutoSession.Config
         opts = {},
         vim.keymap.set('n', '<leader>ws', '<cmd>AutoSession search<CR>', { desc = 'Session search' }),
-        vim.keymap.set('n', '<leader>wd', '<cmd>AutoSession deletePicker<CR>', { desc = 'Session search' }),
+        vim.keymap.set('n', '<leader>wd', '<cmd>AutoSession deletePicker<CR>', { desc = 'Session delete selected from picker' }),
+        vim.keymap.set('n', '<leader>ww', '<cmd>AutoSession disable<CR>', { desc = 'Disable autosession for current session' }),
     },
 }
