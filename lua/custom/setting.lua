@@ -6,6 +6,10 @@
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
+vim.opt.hlsearch = true
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 --  NOTE: Expand bash aliases in neovim
 vim.env.BASH_ENV = '~/.vim_bash_env'
 
@@ -147,20 +151,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
--- Custom Git push command to gerrit main
-vim.api.nvim_create_user_command(
-    "GitPushMain",
-    function()
-        vim.cmd("Git push origin HEAD:refs/for/main")
-    end,
-    {}
-)
--- Custom Git pull command from origin/main with rebase
-vim.api.nvim_create_user_command(
-    "GitPullMain",
-    function()
-        vim.cmd("Git pull --rebase origin/main")
-    end,
-    {}
-)
-

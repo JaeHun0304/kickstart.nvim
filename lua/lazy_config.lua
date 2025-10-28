@@ -7,4 +7,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("custom.plugins")  -- <-- Lazy will load from this module
+require("lazy").setup("custom.plugins", {
+    -- Disable change detection for lazy
+    change_detection = {
+        enabled = false,
+        notify = false,
+    },
+})
