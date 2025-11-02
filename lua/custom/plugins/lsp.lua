@@ -89,15 +89,6 @@ return {
       })
       vim.lsp.enable('lua_ls')
 
-      -- LSP keymaps
-      vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-      vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-
-      -- Code actions (this applies fixes!)
-      vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
-      vim.keymap.set('v', '<space>ca', vim.lsp.buf.code_action, opts) -- Also works in visual mode
-
       -- Show diagnostics automatically on cursor hold
       vim.api.nvim_create_autocmd('CursorHold', {
         group = vim.api.nvim_create_augroup('DiagnosticFloat', {}),
@@ -138,30 +129,20 @@ return {
           local opts = { buffer = ev.buf }
           vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
           vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-          -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-          vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-          vim.keymap.set('n', '<space>f', function()
-            vim.lsp.buf.format { async = true }
-          end, opts)
+          -- LSP: Rename symbol
+          vim.keymap.set('n', '<leader>ln', vim.lsp.buf.rename, { desc = "LSP: Rename symbol"})
+
+          -- LSP keymaps
+          vim.keymap.set('n', '[d', function () vim.diagnostic.jump({ count=-1, float=true}) end)
+          vim.keymap.set('n', ']d', function () vim.diagnostic.jump({ count=1, float=true}) end)
 
           -- Code actions (this applies fixes!)
-          vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
-          vim.keymap.set('v', '<space>ca', vim.lsp.buf.code_action, opts) -- Also works in visual mode
-
-          -- Quick fix - applies the first available code action
-          vim.keymap.set('n', '<space>qf', function()
-            vim.lsp.buf.code_action({
-              filter = function(action)
-                return action.isPreferred
-              end,
-              apply = true,
-            })
-          end, opts)
+          vim.keymap.set('n', '<leader>ga', vim.lsp.buf.code_action, { desc = "Open quickfix suggestions from LSP code actions" })
 
           -- Format buffer
-          vim.keymap.set('n', '<space>f', function()
+          vim.keymap.set('n', '<leader>gf', function()
             vim.lsp.buf.format { async = true }
-          end, opts)
+          end, { desc = "Format buffers using LSP "})
 
           -- Go to definition in splits
           vim.keymap.set('n', 'gs', function()
@@ -261,7 +242,7 @@ return {
   {
     'nvimdev/lspsaga.nvim',
     config = function()
-      require('lspsaga').setup({ 
+      require('lspsaga').setup({
         lightbulb = {
           enable = false,
         },
