@@ -13,7 +13,7 @@ return {
             float_opts = { border = "curved" },
         })
 
-        local Terminal = require("toggleterm.terminal").Terminal
+        --[[ local Terminal = require("toggleterm.terminal").Terminal
 
         -- Capture executable path *before* opening terminal
         local current_exe = nil
@@ -42,6 +42,28 @@ return {
         -- Custom command to invoke lldb in float term
         vim.api.nvim_create_user_command('Lldb', function() _LLDB_TOGGLE() end, {})
         -- LLDB toggle keymap
-        vim.keymap.set('n', '<space>r', '<cmd>Lldb<cr>', { desc = 'Toggle LLDB' })
-    end,
+        vim.keymap.set('n', '<space>r', '<cmd>Lldb<cr>', { desc = 'Toggle LLDB' }) ]]
+        vim.api.nvim_create_user_command("ToggleTermCloseId", function(opts)
+          local id = tonumber(opts.args)
+          local t = require("toggleterm.terminal").get(id)
+          if t then t:close() else vim.notify("No ToggleTerm with id "..opts.args, vim.log.levels.WARN) end
+        end, { nargs = 1 })
+
+        vim.api.nvim_create_user_command("ToggleTermShutdownId", function(opts)
+          local id = tonumber(opts.args)
+          local t = require("toggleterm.terminal").get(id)
+          if t then t:shutdown() else vim.notify("No ToggleTerm with id "..opts.args, vim.log.levels.WARN) end
+        end, { nargs = 1 })
+
+        -- Keymaps to toggle multiple numbered terminals
+        vim.keymap.set("n", "<leader>1", "<cmd>1ToggleTerm<cr>", { desc = "Toggle terminal 1" })
+        vim.keymap.set("n", "<leader>2", "<cmd>2ToggleTerm<cr>", { desc = "Toggle terminal 2" })
+        vim.keymap.set("n", "<leader>3", "<cmd>3ToggleTerm<cr>", { desc = "Toggle terminal 3" })
+        vim.keymap.set("n", "<leader>4", "<cmd>4ToggleTerm<cr>", { desc = "Toggle terminal 4" })
+
+        -- Open with a different direction or size per id
+        vim.keymap.set("n", "<leader>v", "<cmd>2ToggleTerm direction=vertical size=50<cr>", { desc = "Vertical terminal (id=2)" })
+        vim.keymap.set("n", "<leader>h", "<cmd>3ToggleTerm direction=horizontal size=15<cr>", { desc = "Horizontal terminal (id=3)" })
+        vim.keymap.set("n", "<leader>f", "<cmd>4ToggleTerm direction=float<cr>", { desc = "Floating terminal (id=4)" })
+    end
 }
