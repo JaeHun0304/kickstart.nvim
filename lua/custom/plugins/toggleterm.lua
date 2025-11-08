@@ -13,13 +13,13 @@ return {
             float_opts = { border = "curved" },
         })
 
-        --[[ local Terminal = require("toggleterm.terminal").Terminal
+        local Terminal = require("toggleterm.terminal").Terminal
 
         -- Capture executable path *before* opening terminal
         local current_exe = nil
 
-        local lldb = Terminal:new({
-            cmd = "lldb",
+        local gdb = Terminal:new({
+            cmd = "gdb",
             hidden = true,
             direction = "float",
             float_opts = { border = "double" },
@@ -31,18 +31,18 @@ return {
             end,
         })
 
-        function _LLDB_TOGGLE()
+        function _GDB_TOGGLE()
             -- get filename from CURRENT (non-terminal) buffer
             local filename = vim.api.nvim_buf_get_name(0)
             local basename = vim.fn.fnamemodify(filename, ":t:r")  -- 'main.cpp' → 'main'
             current_exe = "./build/" .. basename
 
-            lldb:toggle()
+            gdb:toggle()
         end
-        -- Custom command to invoke lldb in float term
-        vim.api.nvim_create_user_command('Lldb', function() _LLDB_TOGGLE() end, {})
-        -- LLDB toggle keymap
-        vim.keymap.set('n', '<space>r', '<cmd>Lldb<cr>', { desc = 'Toggle LLDB' }) ]]
+        -- Custom command to invoke gdb in float term
+        vim.api.nvim_create_user_command('Gdb', function() _GDB_TOGGLE() end, {})
+        -- GDB toggle keymap
+        vim.keymap.set('n', '<space>r', '<cmd>Gdb<cr>', { desc = 'Toggle GDB' })
         vim.api.nvim_create_user_command("ToggleTermCloseId", function(opts)
           local id = tonumber(opts.args)
           local t = require("toggleterm.terminal").get(id)
