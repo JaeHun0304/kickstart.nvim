@@ -63,7 +63,6 @@ return {
 
         -- Open with a different direction or size per id
         vim.keymap.set("n", "<leader>v", "<cmd>2ToggleTerm direction=vertical size=50<cr>", { desc = "Vertical terminal (id=2)" })
-        vim.keymap.set("n", "<leader>h", "<cmd>3ToggleTerm direction=horizontal size=15<cr>", { desc = "Horizontal terminal (id=3)" })
         vim.keymap.set("n", "<leader>f", "<cmd>4ToggleTerm direction=float<cr>", { desc = "Floating terminal (id=4)" })
     end
 }

@@ -10,6 +10,15 @@ return {
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+      local function is_real_file_buffer(bufnr)
+        if vim.bo[bufnr].buftype ~= "" then
+          return false
+        end
+
+        local uri = vim.uri_from_bufnr(bufnr)
+        return uri ~= nil and uri:match("^file://") ~= nil
+      end
+
       local function setup_lsp_document_highlight(client, bufnr)
         if not client.server_capabilities.documentHighlightProvider then
           return
@@ -21,14 +30,22 @@ return {
         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
           group = group,
           buffer = bufnr,
-          callback = vim.lsp.buf.document_highlight,
+          callback = function()
+            if is_real_file_buffer(bufnr) then
+              vim.lsp.buf.document_highlight()
+            end
+          end,
           desc = "LSP: highlight symbol references under cursor",
         })
 
         vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
           group = group,
           buffer = bufnr,
-          callback = vim.lsp.buf.clear_references,
+          callback = function()
+            if is_real_file_buffer(bufnr) then
+              vim.lsp.buf.clear_references()
+            end
+          end,
           desc = "LSP: clear symbol reference highlights",
         })
       end
@@ -46,7 +63,15 @@ return {
       end
       -- C++ LSP (clangd) - your .clangd file handles the configuration
       vim.lsp.config('clangd', {
-        cmd = { clangd_path, "--header-insertion=never" },
+        cmd = { clangd_path,
+          "--function-arg-placeholders=0",
+          "--header-insertion=never",
+          "--background-index=false",
+          "--background-index-priority=low",
+          "--clang-tidy",
+          "--completion-style=detailed",
+          "--pch-storage=memory",
+        },
         on_attach = on_attach,
         capabilities = caps,
         on_init = function(client)

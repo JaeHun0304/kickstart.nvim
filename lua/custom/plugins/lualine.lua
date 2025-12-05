@@ -14,7 +14,7 @@ return {
           end,
           {
             "filename",
-            path = 2,
+            path = 1,
             file_status = true,
             newfile_status = true,
             symbols = { modified = " [+]", readonly = " [-]", unnamed = "[No Name]"}

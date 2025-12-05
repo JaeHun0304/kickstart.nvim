@@ -28,8 +28,8 @@ vim.keymap.set('n', '<leader>yF', '<cmd>let @+ = expand("%:p")<CR>',
 vim.keymap.set('n', '<leader>nt', '<cmd>NvimTreeToggle<CR>', { desc = 'toggle nvim tree window' })
 
 -- NOTE: shortcuts
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>h', '^', { desc = 'Go to first non-blank character of the line' })
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>l', 'g_', { desc = 'Go to last non-blank character of the line' })
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>h', '20h', { desc = 'Go to first non-blank character of the line' })
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>l', '20l', { desc = 'Go to last non-blank character of the line' })
 vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>', { desc = 'Select all text in buffer' })
 
 -- NOTE: Move windows with C-hjkl
