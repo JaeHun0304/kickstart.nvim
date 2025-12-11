@@ -65,6 +65,8 @@ return {
       vim.lsp.config('clangd', {
         cmd = { clangd_path,
           "--function-arg-placeholders=0",
+          "--background-index=false",
+          "--background-index-priority=low",
           "--header-insertion=never",
           "--clang-tidy",
           "--completion-style=detailed",
