@@ -64,13 +64,9 @@ return {
       -- C++ LSP (clangd) - your .clangd file handles the configuration
       vim.lsp.config('clangd', {
         cmd = { clangd_path,
-          "--function-arg-placeholders=0",
-          "--background-index=false",
-          "--background-index-priority=low",
           "--header-insertion=never",
           "--clang-tidy",
           "--completion-style=detailed",
-          "--pch-storage=memory",
         },
         on_attach = on_attach,
         capabilities = caps,

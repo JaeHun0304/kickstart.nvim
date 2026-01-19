@@ -151,3 +151,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+-- Example: typing :mc becomes :MyCommand
+-- vim.cmd([[cnoreabbrev mc MyCommand]])
+vim.cmd([[cnoreabbrev run AsyncRun]])
