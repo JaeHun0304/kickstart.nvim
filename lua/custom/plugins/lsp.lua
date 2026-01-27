@@ -64,10 +64,19 @@ return {
       -- C++ LSP (clangd) - your .clangd file handles the configuration
       vim.lsp.config('clangd', {
         cmd = { clangd_path,
-          "--background-index=false",
-          "--header-insertion=never",
-          "--clang-tidy",
-          "--completion-style=detailed",
+        -- Enable background indexing but limit resource usage
+        "--background-index",
+        -- Use memory storage instead of disk for better SSH performance
+        "--pch-storage=memory",
+        -- Limit number of background indexing threads (adjust based on server)
+        "-j=4",
+        -- Reduce completion items to speed up responses
+        "--limit-results=50",
+        -- Header insertion can be slow over SSH
+        "--header-insertion=never",
+        -- Log to file for debugging (optional)
+        "--log=error",
+        "--clang-tidy"
         },
         on_attach = on_attach,
         capabilities = caps,
