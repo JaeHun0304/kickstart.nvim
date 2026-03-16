@@ -18,8 +18,8 @@ return {
             -- - sr)'  - [S]urround [R]eplace [)] [']
             require('mini.surround').setup()
 
-            -- Automatically add ending brackets
-            require('mini.pairs').setup()
+            -- Automatically add ending brackets (disabled)
+            -- require('mini.pairs').setup()
 
             -- Simple and easy statusline.
             --  You could remove this setup call if you don't like it,
