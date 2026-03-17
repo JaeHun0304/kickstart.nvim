@@ -31,15 +31,14 @@ vim.g.asyncrun_open = 15
 --  NOTE: Set fold related settings
 vim.opt.foldcolumn = '1'
 vim.opt.foldlevel = 99
-vim.opt.conceallevel = 2
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 
+-- NOTE: Hide markup characters in markdown/json (e.g. conceal links, bold markers)
+vim.opt.conceallevel = 2
+
 -- NOTE: cmake to build from ./build dir
 vim.opt.makeprg = 'cmake --preset default; cmake --build --preset default'
-
---  NOTE: For enhancing autosession experience
-vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -87,9 +86,6 @@ vim.opt.clipboard = 'unnamedplus'
 -- Enable break indent
 vim.opt.breakindent = true
 
--- Save undo history
-vim.opt.undofile = true
-
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -126,8 +122,7 @@ vim.opt.scrolloff = 10
 -- using gui colors
 vim.opt.termguicolors = true
 
--- Set wildmode for command line
-vim.opt.wildmenu = true
+-- Set wildmode for command line (longest match first, then list, then cycle)
 vim.opt.wildmode = 'longest,list,full'
 
 -- Set completeopt
@@ -137,8 +132,9 @@ vim.opt.completeopt = 'menu,menuone,noselect'
 vim.o.grepprg = "rg --vimgrep --smart-case --color=never"
 vim.o.grepformat = "%f:%l:%c:%m"
 
--- Disable swap/backup file for nvim
+-- Disable swap/backup/undo file for nvim
 vim.o.swapfile = false
+vim.o.backup = false
 vim.o.undofile = false
 
 -- Highlight when yanking (copying) text
@@ -146,7 +142,7 @@ vim.o.undofile = false
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
