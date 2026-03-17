@@ -13,7 +13,7 @@ return {
           -- Other optional configurations
           view = {
             merge_tool = {
-              layout = "diff3_mixed",
+              layout = "diff3_vertical",
               disable_diagnostics = true,  -- Temporarily disable diagnostics for conflict buffers
             },
           },

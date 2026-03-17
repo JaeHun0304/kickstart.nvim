@@ -15,7 +15,6 @@ return {
         dependencies = {
             'nvim-lua/plenary.nvim',
             'junegunn/fzf',
-            'fannheyward/telescope-coc.nvim',
             { -- If encountering errors, see telescope-fzf-native README for installation instructions
                 'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -108,12 +107,6 @@ return {
                             },
                         },
                     },
-                    coc = {
-                        theme = 'ivy',
-                        prefer_locations = true, -- always use Telescope locations to preview definitions/declarations/implementations etc
-                        push_cursor_on_edit = true, -- save the cursor position to jump back in the future
-                        timeout = 3000, -- timeout for coc commands
-                    },
                 },
             }
 
@@ -121,7 +114,6 @@ return {
             pcall(require('telescope').load_extension, 'fzf')
             pcall(require('telescope').load_extension, 'ui-select')
             pcall(require('telescope').load_extension, 'live_grep_args')
-            pcall(require('telescope').load_extension, 'coc')
 
             -- See `:help telescope.builtin`
             local builtin = require 'telescope.builtin'
