@@ -1,6 +1,7 @@
 --- ~/.config/nvim/lua/custom/plugins/toggleterm.lua
 return {
     "akinsho/toggleterm.nvim",
+    enabled = false,
     version = "*",
     config = function()
         local ok, toggleterm = pcall(require, "toggleterm")

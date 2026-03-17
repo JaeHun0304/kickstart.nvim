@@ -65,13 +65,11 @@
 | `gr` | References (telescope `lsp_references`, global) |
 | `gv` | Definition in vsplit |
 | `gs` | Definition in hsplit |
-| `gpd` | Peek definition (lspsaga) |
 | `K` | Hover info |
 | `,ln` | Rename symbol |
 | `,ga` | Code actions |
 | `,gf` | Format buffer (LSP) |
 | `[d` / `]d` | Prev/next diagnostic |
-| `,t` | Toggle floating terminal (lspsaga) |
 
 ### Telescope
 | Key | Action |
@@ -107,18 +105,10 @@
 | `,gi` | Preview hunk inline |
 | `,gd` | Git diff vsplit |
 
-### Terminal (toggleterm)
-| Key | Action |
-|-----|--------|
-| `<space>r` | Toggle GDB |
-| `,1` - `,4` | Toggle terminal 1-4 |
-| `,v` | Vertical terminal (id=2) |
-| `,f` | Floating terminal (id=4) |
-
 ### Format
 | Key | Action |
 |-----|--------|
-| `,f` | Format buffer (conform) |
+| `,f` | Format buffer (LSP built-in) |
 
 ## Installed Plugins
 | Plugin | Purpose |
@@ -127,7 +117,6 @@
 | lazy.nvim | Plugin manager |
 | nvim-cmp + LuaSnip | Autocompletion + snippets |
 | nvim-lspconfig + mason | LSP (clangd for C++, lua_ls) |
-| lspsaga | Enhanced LSP UI (peek definition, float terminal) |
 | telescope.nvim | Fuzzy finder (fzf, live-grep-args) |
 | nvim-treesitter | Syntax highlighting (csv disabled) |
 | vim-fugitive | Git commands |
@@ -136,26 +125,22 @@
 | nvim-tree.lua | File explorer (width=50) |
 | bufferline.nvim | Buffer tabs (slant style) |
 | nvim-bufdel | Buffer delete without closing window |
-| toggleterm.nvim | Terminal (GDB, float, vertical) |
 | which-key.nvim | Keybind hints |
 | lualine.nvim | Statusline with LSP progress |
 | mini.nvim | Textobjects, surround |
 | nvim-ufo | Code folding |
-| conform.nvim | Formatting (C/C++/Lua auto-format off) |
-| Comment.nvim | Commenting |
 | vim-sleuth | Auto-detect indent |
 | todo-comments.nvim | TODO highlighting |
 | csv.vim | CSV editing |
 | vim-dirdiff | Directory diff |
 | vim-fetch | Open file:line:col |
 | asyncrun.vim | Async shell commands (`:run` alias) |
-| vcscommand.vim | SVN commands |
-| luarocks.nvim | Luarocks integration |
 
 ## Disabled Plugins
 | Plugin | Reason |
 |--------|--------|
 | auto-session | Disabled (`enabled = false`) |
+| toggleterm.nvim | Disabled (`enabled = false`) |
 | indent-blankline.nvim | Disabled (`enabled = false`) |
 | copilot.vim | Backed up as `copilot.lua.bak`, not loaded |
 

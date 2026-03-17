@@ -40,3 +40,6 @@ vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'move cursor to upper window'})
 
 -- NOTE: insert space in normal mode with <space>
 vim.keymap.set('n', '<space>', 'a<space><esc>', { desc = 'Insert space in normale mode' })
+
+-- NOTE: Format buffer using LSP
+vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, { desc = 'Format buffer (LSP)' })
