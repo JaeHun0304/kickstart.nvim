@@ -85,14 +85,6 @@ return {
                     file_ignore_patterns = {".git/", ".svn/", ".cache/", "%.o", "%.d"}
                 },
 
-                pickers = {
-                    find_files = {
-                        hidden = true,
-                        no_ignore = true,
-                        find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
-                    },
-                },
-
                 extensions = {
                     ['ui-select'] = {
                         require('telescope.themes').get_dropdown(),
@@ -122,6 +114,9 @@ return {
             vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
             vim.keymap.set('n', '<leader>sf', builtin.find_files,
                 { desc = '[S]earch [F]iles' })
+            vim.keymap.set('n', '<leader>sa', function()
+              builtin.find_files({ no_ignore = true, hidden = true })
+            end, { desc = "Find All files (including ignored)" })
             vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
             vim.keymap.set('n', '<leader>sw', live_grep_args_shortcuts.grep_word_under_cursor,
                 { desc = '[S]earch current [W]ord' })
