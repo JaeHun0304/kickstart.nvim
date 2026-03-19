@@ -8,6 +8,7 @@ local d = ls.dynamic_node       -- dynamic input field
 local sn = ls.snippet_node      -- another snippet node
 local fmt = require("luasnip.extras.fmt").fmt  -- format template
 local rep = require("luasnip.extras").rep      -- repeat previous input
+local f = ls.function_node                     -- function node (for captures)
 local function capture_first(_, snip)
     return snip.captures[1]
 end
@@ -84,4 +85,21 @@ return {
     s({trig="inc_(%w+)", wordTrig=false, regTrig=true}, fmt([[
         #include <{}>
     ]], { f(capture_first) })),
+
+    -- gprintf macros (tabstops: format string in quotes, then args)
+    s("gprintf", fmt([[
+        gprintf("{}", {});
+    ]], { i(1, "fmt"), i(2, "args") })),
+
+    s("gprintfPar", fmt([[
+        gprintfPar({}, "{}", {});
+    ]], { i(1, "par"), i(2, "fmt"), i(3, "args") })),
+
+    s("gprintfUsn", fmt([[
+        gprintfUsn({}, "{}", {});
+    ]], { i(1, "usn"), i(2, "fmt"), i(3, "args") })),
+
+    s("gprintfUsnZ7", fmt([[
+        gprintfUsnZ7({}, "{}", {});
+    ]], { i(1, "usn"), i(2, "fmt"), i(3, "args") })),
 }
