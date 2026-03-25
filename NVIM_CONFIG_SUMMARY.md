@@ -65,6 +65,9 @@
 | `gr` | References (telescope `lsp_references`, global) |
 | `gv` | Definition in vsplit |
 | `gs` | Definition in hsplit |
+| `gp` | Peek definition (floating window) |
+| `gP` | Peek references (floating window) |
+| `gQ` | Close all peek windows |
 | `K` | Hover info |
 | `,ln` | Rename symbol |
 | `,ga` | Code actions |
@@ -105,6 +108,15 @@
 | `,gi` | Preview hunk inline |
 | `,gd` | Git diff vsplit |
 
+### Terminal (toggleterm)
+| Key | Action |
+|-----|--------|
+| `,1` / `,2` / `,3` / `,4` | Toggle terminals 1-4 (floating) |
+| `,tf` | Floating terminal (id=4) |
+| `,v` | Vertical split terminal (id=2, 50 cols) |
+| `<Space>r` | GDB in floating terminal |
+| `<Esc><Esc>` | Exit terminal mode |
+
 ### Format
 | Key | Action |
 |-----|--------|
@@ -134,13 +146,14 @@
 | csv.vim | CSV editing |
 | vim-dirdiff | Directory diff |
 | vim-fetch | Open file:line:col |
+| goto-preview | Peek definition/references in floating window |
 | asyncrun.vim | Async shell commands (`:run` alias) |
 
 ## Disabled Plugins
 | Plugin | Reason |
 |--------|--------|
-| auto-session | Disabled (`enabled = false`) |
-| toggleterm.nvim | Disabled (`enabled = false`) |
+| auto-session | Enabled (manual save only, auto-restore on) |
+| toggleterm.nvim | **Enabled** - floating terminal with GDB integration |
 | indent-blankline.nvim | Disabled (`enabled = false`) |
 | copilot.vim | Backed up as `copilot.lua.bak`, not loaded |
 

@@ -1,16 +1,21 @@
 -- ~/.config/nvim/lua/custom/plugins/session.lua
 return {
-    -- NOTE: Plugins to save session automatically
     {
         'rmagatti/auto-session',
-        enabled = false,
+        enabled = true,
         lazy = false,
-        ---enables autocomplete for opts
         ---@module "auto-session"
         ---@type AutoSession.Config
-        opts = {},
-        vim.keymap.set('n', '<leader>ws', '<cmd>AutoSession search<CR>', { desc = 'Session search' }),
-        vim.keymap.set('n', '<leader>wd', '<cmd>AutoSession deletePicker<CR>', { desc = 'Session delete selected from picker' }),
-        vim.keymap.set('n', '<leader>ww', '<cmd>AutoSession disable<CR>', { desc = 'Disable autosession for current session' }),
+        opts = {
+            auto_save = false,    -- no auto-save on exit
+            auto_restore = true,  -- restore session when opening nvim in a session dir
+            auto_create = false,  -- don't create session automatically
+        },
+        keys = {
+            { '<leader>ws', '<cmd>SessionSearch<CR>',  desc = 'Session search' },
+            { '<leader>wS', '<cmd>SessionSave<CR>',    desc = 'Session save' },
+            { '<leader>wd', '<cmd>SessionDelete<CR>',  desc = 'Session delete' },
+            { '<leader>wr', '<cmd>SessionRestore<CR>', desc = 'Session restore' },
+        },
     },
 }

@@ -1,7 +1,7 @@
 --- ~/.config/nvim/lua/custom/plugins/toggleterm.lua
 return {
     "akinsho/toggleterm.nvim",
-    enabled = false,
+    enabled = true,
     version = "*",
     config = function()
         local ok, toggleterm = pcall(require, "toggleterm")
@@ -64,6 +64,6 @@ return {
 
         -- Open with a different direction or size per id
         vim.keymap.set("n", "<leader>v", "<cmd>2ToggleTerm direction=vertical size=50<cr>", { desc = "Vertical terminal (id=2)" })
-        vim.keymap.set("n", "<leader>f", "<cmd>4ToggleTerm direction=float<cr>", { desc = "Floating terminal (id=4)" })
+        vim.keymap.set("n", "<leader>tf", "<cmd>4ToggleTerm direction=float<cr>", { desc = "Floating terminal (id=4)" })
     end
 }
