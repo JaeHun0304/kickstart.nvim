@@ -35,9 +35,6 @@ return {
             -- Support to pass ripgrep args into telescope
             {
                 'nvim-telescope/telescope-live-grep-args.nvim',
-                -- This will not install any breaking changes.
-                -- For major updates, this must be adjusted manually.
-                version = '^1.1.0',
             }
         },
         config = function()
