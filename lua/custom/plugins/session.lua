@@ -12,10 +12,10 @@ return {
             auto_create = false,  -- don't create session automatically
         },
         keys = {
-            { '<leader>ws', '<cmd>SessionSearch<CR>',  desc = 'Session search' },
-            { '<leader>wS', '<cmd>SessionSave<CR>',    desc = 'Session save' },
-            { '<leader>wd', '<cmd>SessionDelete<CR>',  desc = 'Session delete' },
-            { '<leader>wr', '<cmd>SessionRestore<CR>', desc = 'Session restore' },
+            { '<leader>wS', '<cmd>AutoSession search<CR>',  desc = 'Session search' },
+            { '<leader>ws', '<cmd>AutoSession save<CR>',    desc = 'Session save' },
+            { '<leader>wd', '<cmd>AutoSession delete<CR>',  desc = 'Session delete' },
+            { '<leader>wr', '<cmd>AutoSession restore<CR>', desc = 'Session restore' },
         },
     },
 }
