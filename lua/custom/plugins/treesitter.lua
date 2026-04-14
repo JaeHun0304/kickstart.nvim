@@ -1,4 +1,16 @@
 return {
+    -- Show function/class context at top of window when scrolling
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        opts = {
+            enable = true,
+            max_lines = 3,
+            min_window_height = 20,
+            mode = 'cursor',
+        },
+    },
+
     -- Highlight, edit, and navigate code
     {
         'nvim-treesitter/nvim-treesitter',

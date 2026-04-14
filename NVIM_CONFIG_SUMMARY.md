@@ -131,6 +131,7 @@
 | nvim-lspconfig + mason | LSP (clangd for C++, lua_ls) |
 | telescope.nvim | Fuzzy finder (fzf, live-grep-args) |
 | nvim-treesitter | Syntax highlighting (csv disabled) |
+| nvim-treesitter-context | Shows function/class context at top of window (max 3 lines, cursor mode) |
 | vim-fugitive | Git commands |
 | diffview.nvim | Git diff/merge (diff3_vertical) |
 | gitsigns.nvim | Git signs in gutter |
