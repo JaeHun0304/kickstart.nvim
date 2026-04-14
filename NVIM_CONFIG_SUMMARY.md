@@ -143,7 +143,7 @@
 | nvim-ufo | Code folding |
 | vim-sleuth | Auto-detect indent |
 | todo-comments.nvim | TODO highlighting |
-| csv.vim | CSV editing |
+| csv.vim | CSV editing (lazy=false, treesitter disabled for csv) |
 | vim-dirdiff | Directory diff |
 | vim-fetch | Open file:line:col |
 | goto-preview | Peek definition/references in floating window |
