@@ -14,9 +14,6 @@ vim.keymap.set('n', '<leader>Q', '<cmd>cclose<CR>', { desc = 'Close quickfix win
 vim.keymap.set('n', '<leader>qd', '<cmd>cexpr []<CR>', { desc = 'Delete quickfix list' })
 vim.keymap.set('n', '<C-n>', '<cmd>cnext<CR>', { desc = 'go to next quickfix item' })
 vim.keymap.set('n', '<C-p>', '<cmd>cprev<CR>', { desc = 'go to prev quickfix item' })
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- NOTE: Copy current buffer filename
 vim.keymap.set('n', '<leader>yf', '<cmd>let @+ = expand("%:t") . ":" . line(".")<CR>',
@@ -30,7 +27,7 @@ vim.keymap.set('n', '<leader>nt', '<cmd>NvimTreeFindFile<CR>', { desc = 'Find cu
 -- NOTE: shortcuts
 vim.keymap.set({ 'n', 'x', 'o' }, '<leader>h', '20h', { desc = 'Go to first non-blank character of the line' })
 vim.keymap.set({ 'n', 'x', 'o' }, '<leader>l', '20l', { desc = 'Go to last non-blank character of the line' })
-vim.keymap.set('n', '<leader>a', ':keepjumps normal! ggVG<cr>', { desc = 'Select all text in buffer' })
+vim.keymap.set('n', '<leader>A', ':keepjumps normal! ggVG<cr>', { desc = 'Select all text in buffer' })
 
 -- NOTE: Move windows with C-hjkl
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'move cursor to left window' })
