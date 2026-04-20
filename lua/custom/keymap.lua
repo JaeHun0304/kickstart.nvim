@@ -22,7 +22,7 @@ vim.keymap.set('n', '<leader>yF', '<cmd>let @+ = expand("%:p")<CR>',
     { desc = 'copy current buffer file name (full path)' })
 
 -- NOTE: Toggle nvim-tree
-vim.keymap.set('n', '<leader>nt', '<cmd>NvimTreeFindFile<CR>', { desc = 'Find current buffer in nvim tree window' })
+vim.keymap.set('n', '<leader>nt', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle nvim tree window' })
 
 -- NOTE: shortcuts
 vim.keymap.set({ 'n', 'x', 'o' }, '<leader>h', '20h', { desc = 'Go to first non-blank character of the line' })
