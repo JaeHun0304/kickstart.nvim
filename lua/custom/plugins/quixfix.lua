@@ -1,4 +1,7 @@
 return {
     -- NOTE: Plugin to run shell command in async quickfix window
-    { 'skywind3000/asyncrun.vim' },
+    {
+        'skywind3000/asyncrun.vim',
+        cmd = { 'AsyncRun', 'AsyncStop', 'AsyncReset' },
+    },
 }

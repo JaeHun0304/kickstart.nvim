@@ -1,6 +1,6 @@
 return {
   "chrisbra/csv.vim",
-  lazy = false,
+  ft = "csv",
   init = function()
     -- Ensure csv.vim ftplugin loads before syntax script
     vim.g.csv_no_conceal = 1

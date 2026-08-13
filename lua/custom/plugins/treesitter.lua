@@ -2,6 +2,7 @@ return {
     -- Show function/class context at top of window when scrolling
     {
         'nvim-treesitter/nvim-treesitter-context',
+        event = { 'BufReadPost', 'BufNewFile' },
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
         opts = {
             enable = true,
@@ -15,6 +16,8 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         branch = 'master',
+        event = { 'BufReadPost', 'BufNewFile' },
+        cmd = { 'TSUpdate', 'TSUpdateSync', 'TSInstall', 'TSInstallSync', 'TSUninstall', 'TSBufEnable', 'TSBufDisable', 'TSEnable', 'TSDisable', 'TSModuleInfo' },
         build = ':TSUpdate',
         opts = {
             ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'python' },

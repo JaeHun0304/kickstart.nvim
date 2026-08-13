@@ -7,9 +7,9 @@ return {
         ---@module "auto-session"
         ---@type AutoSession.Config
         opts = {
-            auto_save = false,    -- no auto-save on exit
+            auto_save = true,     -- auto-save session on exit
             auto_restore = true,  -- restore session when opening nvim in a session dir
-            auto_create = false,  -- don't create session automatically
+            auto_create = true,   -- create session automatically
         },
         keys = {
             { '<leader>wS', '<cmd>AutoSession search<CR>',  desc = 'Session search' },

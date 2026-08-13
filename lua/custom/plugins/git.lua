@@ -2,9 +2,26 @@
 return {
     {
       'tpope/vim-fugitive',
+      cmd = {
+        'G', 'Git', 'Gvdiffsplit', 'Gdiffsplit', 'Gread', 'Gwrite',
+        'Gedit', 'Gclog', 'Glgrep', 'Gblame', 'Gbrowse', 'Ggrep',
+      },
+      keys = {
+        { '<leader>dd', '<cmd>tab Git! diff<CR>',          desc = 'git diff (unified, full tab)' },
+        { '<leader>dD', '<cmd>tab Git! diff --staged<CR>', desc = 'git diff staged (full tab)' },
+      },
     },
     {
       'sindrets/diffview.nvim',
+      cmd = {
+        'DiffviewOpen', 'DiffviewClose', 'DiffviewFileHistory',
+        'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewRefresh',
+      },
+      keys = {
+        { '<leader>do', '<cmd>DiffviewOpen -uno<CR>', desc = 'open diffview panel - ignore untracked files' },
+        { '<leader>dc', '<cmd>DiffviewClose<CR>',     desc = 'close diffview panel' },
+        { '<leader>gh', '<cmd>DiffviewFileHistory<CR>', desc = 'open git file history' },
+      },
       config = function()
         require('diffview').setup({
           -- Optional: Enhance the diff view with more colors
@@ -18,13 +35,20 @@ return {
             },
           },
         })
-        vim.keymap.set('n', '<leader>do', '<cmd>DiffviewOpen -uno<CR>', { desc = 'open diffview panel - ignore untracked files' })
-        vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<CR>', { desc = 'close diffview panel' })
-        vim.keymap.set('n', '<leader>gh', '<cmd>DiffviewFileHistory<CR>', { desc = 'open git file history' })
       end
     },
     {
       'lewis6991/gitsigns.nvim',
+      event = { 'BufReadPre', 'BufNewFile' },
+      keys = {
+        { '<leader>gn', '<cmd>Gitsigns next_hunk<CR>',           desc = 'Go to next git hunk' },
+        { '<leader>gp', '<cmd>Gitsigns prev_hunk<CR>',           desc = 'Go to prev git hunk' },
+        { '<leader>gr', '<cmd>Gitsigns reset_hunk<CR>',          desc = 'Revert git hunk' },
+        { '<leader>gr', function() require('gitsigns').reset_hunk({vim.fn.line('.'), vim.fn.line('v')}) end, mode = 'v', desc = 'Revert selected lines' },
+        { '<leader>gs', function() require('gitsigns').stage_hunk({vim.fn.line('.'), vim.fn.line('v')}) end, mode = 'v', desc = 'Stage selected lines' },
+        { '<leader>gi', '<cmd>Gitsigns preview_hunk_inline<CR>', desc = 'Preview git hunk inline' },
+        { '<leader>gd', '<cmd>Gvdiffsplit<CR>',                  desc = 'Do git diff in vertical split' },
+      },
       config = function()
         require('gitsigns').setup({
           signcolumn = true,     -- Yes, show signs in the sign column
@@ -37,11 +61,6 @@ return {
             -- No keymaps here
           end
         })
-        vim.keymap.set('n', '<leader>gn', '<cmd>Gitsigns next_hunk<CR>', { desc = 'Go to next git hunk' })
-        vim.keymap.set('n', '<leader>gp', '<cmd>Gitsigns prev_hunk<CR>', { desc = 'Go to prev git hunk' })
-        vim.keymap.set('n', '<leader>gr', '<cmd>Gitsigns reset_hunk<CR>', { desc = 'Revert git hunk' })
-        vim.keymap.set('n', '<leader>gi', '<cmd>Gitsigns preview_hunk_inline<CR>', { desc = 'Preview git hunk inline' })
-        vim.keymap.set('n', '<leader>gd', '<cmd>Gvdiffsplit<CR>', { desc = "Do git diff in vertical split" })
       end
     }
 }

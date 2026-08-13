@@ -64,19 +64,14 @@ return {
       -- C++ LSP (clangd) - your .clangd file handles the configuration
       vim.lsp.config('clangd', {
         cmd = { clangd_path,
-        -- Enable background indexing but limit resource usage
-        "--background-index",
-        -- Use memory storage instead of disk for better SSH performance
-        "--pch-storage=memory",
         -- Limit number of background indexing threads (adjust based on server)
-        "-j=4",
+        "-j=6",
         -- Reduce completion items to speed up responses
         "--limit-results=50",
         -- Header insertion can be slow over SSH
         "--header-insertion=never",
         -- Log to file for debugging (optional)
-        "--log=error",
-        "--clang-tidy"
+        "--log=error"
         },
         on_attach = on_attach,
         capabilities = caps,
@@ -193,12 +188,14 @@ return {
   -- Install lsp using mason
   {
   "williamboman/mason.nvim",
+  cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog", "MasonUpdate" },
   build = ":MasonUpdate",
   config = function() require("mason").setup() end,
   },
 
   {
     "williamboman/mason-lspconfig.nvim",
+    cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
     dependencies = { "mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("mason-lspconfig").setup({

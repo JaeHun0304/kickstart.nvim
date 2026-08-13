@@ -1,6 +1,8 @@
 -- ~/.config/nvim/lua/custom/plugins/goto.lua
 return {
   -- NOTE: open specific line of file
+  -- vim-fetch must load eagerly so it can intercept "file:line" cmdline
+  -- arguments before the buffer is created.
   { 'wsdjeg/vim-fetch' },
 
   -- Peek definition in floating window

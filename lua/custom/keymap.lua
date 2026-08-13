@@ -40,3 +40,12 @@ vim.keymap.set('n', '<space>', 'a<space><esc>', { desc = 'Insert space in normal
 
 -- NOTE: Format buffer using LSP
 vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, { desc = 'Format buffer (LSP)' })
+
+-- NOTE: Toggle diff mode across all vsplit windows
+vim.keymap.set('n', '<leader>dt', function()
+    if vim.o.diff then
+        vim.cmd('windo diffoff')
+    else
+        vim.cmd('windo diffthis')
+    end
+end, { desc = 'Toggle diff mode for split windows' })

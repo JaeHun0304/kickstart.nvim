@@ -13,4 +13,16 @@ require("lazy").setup("custom.plugins", {
         enabled = false,
         notify = false,
     },
+    performance = {
+        cache = { enabled = true },
+        rtp = {
+            disabled_plugins = {
+                "tohtml",
+                "tutor",
+                "netrwPlugin",
+                "matchit",
+                "matchparen",
+            },
+        },
+    },
 })

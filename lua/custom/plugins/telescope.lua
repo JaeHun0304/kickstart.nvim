@@ -117,6 +117,12 @@ return {
             vim.keymap.set('n', '<leader>sa', function()
               builtin.find_files({ no_ignore = true, hidden = true })
             end, { desc = "Find All files (including ignored)" })
+            vim.keymap.set('n', '<leader>fd', function()
+              local dir = vim.fn.input('Directory: ', '', 'dir')
+              if dir ~= '' then
+                builtin.find_files({ cwd = dir })
+              end
+            end, { desc = '[F]ind files in [D]irectory' })
             vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
             vim.keymap.set('n', '<leader>sw', live_grep_args_shortcuts.grep_word_under_cursor,
                 { desc = '[S]earch current [W]ord' })

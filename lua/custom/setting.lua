@@ -1,5 +1,8 @@
 -- ~/.config/nvim/lua/custom/settings.lua
 
+-- NOTE: Set GUI font for nvim-qt (guifont is respected natively, no shim needed)
+vim.opt.guifont = 'JetBrains Mono NL:h18'
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)

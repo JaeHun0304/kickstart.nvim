@@ -1,12 +1,20 @@
 -- ~/.config/nvim/lua/custom/plugins/format.lua
 return {
-    'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+    {
+        'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+        event = { 'BufReadPre', 'BufNewFile' },
+    },
     -- note: use fold with nvim-ufo
-    { 'kevinhwang91/nvim-ufo', dependencies = { 'kevinhwang91/promise-async' }, opts = {} },
+    {
+        'kevinhwang91/nvim-ufo',
+        event = { 'BufReadPost', 'BufNewFile' },
+        dependencies = { 'kevinhwang91/promise-async' },
+        opts = {},
+    },
     -- Highlight todo, notes, etc in comments
     {
         'folke/todo-comments.nvim',
-        event = 'VimEnter',
+        event = 'VeryLazy',
         dependencies = { 'nvim-lua/plenary.nvim' },
         opts = { signs = false },
     },
