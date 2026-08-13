@@ -21,12 +21,7 @@ vim.keymap.set('n', '<leader>yf', '<cmd>let @+ = expand("%:t") . ":" . line(".")
 vim.keymap.set('n', '<leader>yF', '<cmd>let @+ = expand("%:p")<CR>',
     { desc = 'copy current buffer file name (full path)' })
 
--- NOTE: Toggle nvim-tree
-vim.keymap.set('n', '<leader>nt', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle nvim tree window' })
-
 -- NOTE: shortcuts
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>h', '20h', { desc = 'Go to first non-blank character of the line' })
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>l', '20l', { desc = 'Go to last non-blank character of the line' })
 vim.keymap.set('n', '<leader>A', ':keepjumps normal! ggVG<cr>', { desc = 'Select all text in buffer' })
 
 -- NOTE: Move windows with C-hjkl
@@ -37,9 +32,6 @@ vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'move cursor to upper window'})
 
 -- NOTE: insert space in normal mode with <space>
 vim.keymap.set('n', '<space>', 'a<space><esc>', { desc = 'Insert space in normale mode' })
-
--- NOTE: Format buffer using LSP
-vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, { desc = 'Format buffer (LSP)' })
 
 -- NOTE: Toggle diff mode across all vsplit windows
 vim.keymap.set('n', '<leader>dt', function()

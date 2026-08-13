@@ -163,10 +163,10 @@ return {
           vim.keymap.set('n', ']d', function () vim.diagnostic.jump({ count=1, float=true}) end)
 
           -- Code actions (this applies fixes!)
-          vim.keymap.set('n', '<leader>ga', vim.lsp.buf.code_action, { desc = "Open quickfix suggestions from LSP code actions" })
+          vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = "Open quickfix suggestions from LSP code actions" })
 
           -- Format buffer
-          vim.keymap.set('n', '<leader>gf', function()
+          vim.keymap.set('n', '<leader>lf', function()
             vim.lsp.buf.format { async = true }
           end, { desc = "Format buffers using LSP "})
 

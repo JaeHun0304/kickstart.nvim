@@ -32,7 +32,6 @@
 | `<C-\><C-n>` | t | Exit terminal mode (default nvim, safe for running processes) |
 | `<C-w>w` | t | Exit terminal mode + focus previous window |
 | `<C-h/j/k/l>` | n | Move between windows |
-| `,h` / `,l` | n/x/o | Move 20 chars left/right |
 | `,A` | n | Select all (`keepjumps ggVG`) |
 | `,dt` | n | Toggle `diffthis`/`diffoff` across all split windows |
 | `vsb` | cmdline abbrev | Expands to `vert sb` |
@@ -52,7 +51,6 @@
 | `,yf` | Copy filename:line_number |
 | `,yF` | Copy full path |
 | `,e` | Toggle NvimTree |
-| `,nt` | Toggle NvimTree (duplicate of `,e`, set in `keymap.lua`) |
 | `,nf` | Find current file in NvimTree |
 | `,.` | Next buffer |
 | `,m` | Previous buffer |
@@ -83,9 +81,8 @@
 | `gQ` | Close all peek windows |
 | `K` | Hover info |
 | `,ln` | Rename symbol |
-| `,ga` | Code actions |
-| `,gf` | Format buffer (LSP, set on `LspAttach`) |
-| `,f` | Format buffer (LSP, global keymap in `keymap.lua`, duplicate of `,gf`) |
+| `,la` | Code actions |
+| `,lf` | Format buffer (LSP, set on `LspAttach`) |
 | `[d` / `]d` | Prev/next diagnostic (floating) |
 
 ### Telescope
@@ -140,7 +137,7 @@
 ### Format
 | Key | Action |
 |-----|--------|
-| `,f` / `,gf` | Format buffer (LSP built-in) |
+| `,lf` | Format buffer (LSP built-in) |
 
 ## Installed Plugins
 | Plugin | Purpose |
