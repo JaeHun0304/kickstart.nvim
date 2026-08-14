@@ -48,10 +48,10 @@
 ### File/Buffer
 | Key | Action |
 |-----|--------|
-| `,yf` | Copy filename:line_number |
+| `,yf` | Copy filename |
 | `,yF` | Copy full path |
 | `,e` | Toggle NvimTree |
-| `,nf` | Find current file in NvimTree |
+| `,ef` | Find current file in NvimTree |
 | `,.` | Next buffer |
 | `,m` | Previous buffer |
 | `,bp` | Pick buffer |

@@ -7,7 +7,7 @@ return {
         cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus", "NvimTreeFindFile", "NvimTreeCollapse", "NvimTreeRefresh" },
         keys = {
             { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file tree" },
-            { "<leader>nf", "<cmd>NvimTreeFindFile<cr>", desc = "Find current file in tree" },
+            { "<leader>ef", "<cmd>NvimTreeFindFile<cr>", desc = "Find current file in tree" },
         },
         dependencies = {
             "nvim-tree/nvim-web-devicons",

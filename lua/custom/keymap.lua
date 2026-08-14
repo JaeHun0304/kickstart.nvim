@@ -16,7 +16,7 @@ vim.keymap.set('n', '<C-n>', '<cmd>cnext<CR>', { desc = 'go to next quickfix ite
 vim.keymap.set('n', '<C-p>', '<cmd>cprev<CR>', { desc = 'go to prev quickfix item' })
 
 -- NOTE: Copy current buffer filename
-vim.keymap.set('n', '<leader>yf', '<cmd>let @+ = expand("%:t") . ":" . line(".")<CR>',
+vim.keymap.set('n', '<leader>yf', '<cmd>let @+ = expand("%:t")<CR>',
     { desc = 'copy current buffer file name (just file name)' })
 vim.keymap.set('n', '<leader>yF', '<cmd>let @+ = expand("%:p")<CR>',
     { desc = 'copy current buffer file name (full path)' })
