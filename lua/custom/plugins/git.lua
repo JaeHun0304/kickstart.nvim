@@ -9,6 +9,7 @@ return {
       keys = {
         { '<leader>dd', '<cmd>tab Git! diff<CR>',          desc = 'git diff (unified, full tab)' },
         { '<leader>dD', '<cmd>tab Git! diff --staged<CR>', desc = 'git diff staged (full tab)' },
+        { '<leader>gt', '<cmd>G ls-files --error-unmatch %<CR>', desc = 'Is current file tracked by git?' },
       },
     },
     {
@@ -20,7 +21,7 @@ return {
       keys = {
         { '<leader>do', '<cmd>DiffviewOpen -uno<CR>', desc = 'open diffview panel - ignore untracked files' },
         { '<leader>dc', '<cmd>DiffviewClose<CR>',     desc = 'close diffview panel' },
-        { '<leader>gh', '<cmd>DiffviewFileHistory<CR>', desc = 'open git file history' },
+        { '<leader>gh', '<cmd>DiffviewFileHistory %<CR>', desc = 'open git file history (current file)' },
       },
       config = function()
         require('diffview').setup({
@@ -47,6 +48,7 @@ return {
         { '<leader>gr', function() require('gitsigns').reset_hunk({vim.fn.line('.'), vim.fn.line('v')}) end, mode = 'v', desc = 'Revert selected lines' },
         { '<leader>gs', function() require('gitsigns').stage_hunk({vim.fn.line('.'), vim.fn.line('v')}) end, mode = 'v', desc = 'Stage selected lines' },
         { '<leader>gi', '<cmd>Gitsigns preview_hunk_inline<CR>', desc = 'Preview git hunk inline' },
+        { '<leader>gb', '<cmd>Gitsigns blame<CR>',               desc = 'Git blame full file in side window' },
         { '<leader>gd', '<cmd>Gvdiffsplit<CR>',                  desc = 'Do git diff in vertical split' },
       },
       config = function()

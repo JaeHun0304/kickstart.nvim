@@ -58,8 +58,37 @@ return {
       caps.textDocument.foldingRange = nil
 
       local clangd_path = vim.fn.stdpath("data") .. "/mason/bin/clangd"
+      local clangd_env = nil
       if vim.fn.hostname():match("atletx7") or vim.fn.hostname():match("atletx8") or vim.fn.hostname():match("atlvibex") then
-        clangd_path = "/tool/pandora64/.package/llvm-20.1.7-gcc1020/bin/clangd"
+        -- Mirror the llvm module selection in ~/.bashrc so the editor's indexer
+        -- stays on the same toolchain as the shell: RHEL7 -> gcc10 build,
+        -- RHEL8 -> gcc15 build. Unreadable/unknown release falls back to the
+        -- gcc10 build, which runs on both.
+        local release = ""
+        if vim.fn.filereadable("/etc/redhat-release") == 1 then
+          release = vim.fn.readfile("/etc/redhat-release")[1] or ""
+        end
+        local pandora_clangd = "/tool/pandora64/.package/llvm-20.1.7-gcc1020/bin/clangd"
+        if release:match("release 8") then
+          pandora_clangd = "/tool/pandora64/.package/llvm-21.1.0-gcc1520/bin/clangd"
+        end
+
+        -- Only take the pandora build if it is actually present; otherwise keep
+        -- the mason clangd (which needs no injected libs).
+        if vim.fn.executable(pandora_clangd) == 1 then
+          clangd_path = pandora_clangd
+          -- Both pandora clangd builds link against libgrpc++.so.1 / libgrpc.so.15 /
+          -- libprotobuf.so.3.14.0.0, supplied only by grpc-1.36.2-gcc1020. The grpc
+          -- modulefile does not export LD_LIBRARY_PATH, so inject it here -- this also
+          -- covers nvim launched from a shell that never sourced ~/.bashrc (nvim-qt,
+          -- desktop launcher, remote spawn).
+          local grpc_lib = "/tool/pandora64/.package/grpc-1.36.2-gcc1020/lib"
+          local ld = vim.env.LD_LIBRARY_PATH or ""
+          if not (":" .. ld .. ":"):find(":" .. grpc_lib .. ":", 1, true) then
+            ld = ld ~= "" and (grpc_lib .. ":" .. ld) or grpc_lib
+          end
+          clangd_env = { LD_LIBRARY_PATH = ld }
+        end
       end
       -- C++ LSP (clangd) - your .clangd file handles the configuration
       vim.lsp.config('clangd', {
@@ -71,6 +100,7 @@ return {
         -- Log to file for debugging (optional)
         "--log=error"
         },
+        cmd_env = clangd_env,
         on_attach = on_attach,
         capabilities = caps,
         on_init = function(client)

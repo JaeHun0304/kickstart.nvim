@@ -4,6 +4,7 @@ local load = function(mod)
 end
 
 load('custom.setting')
+load('custom.projdirs')
 load('custom.keymap')
 -- load('custom.state_dirs')
 require("lazy_config")

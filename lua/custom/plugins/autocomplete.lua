@@ -46,6 +46,62 @@ return {
             local luasnip = require 'luasnip'
             luasnip.config.setup {}
 
+            -- Fix `$VAR/` completion for variable names containing digits.
+            --
+            -- cmp-path resolves "$VAR/" with the pattern '%$([%a_]+)/$', which
+            -- matches letters and underscore but NOT digits. So $pl_worksp2,
+            -- $pt_scratch1, $nv_corr1 ... never match and _dirname() returns
+            -- nil. cmp then falls back to the 'cmdline' source, whose
+            -- getcompletion() returns an ABSOLUTE path, and cmp inserts that at
+            -- the keyword offset -- which sits after the literal "$pl_worksp2/"
+            -- still on the line. Result:
+            --     :e $pl_worksp2//proj/pl_tsim_workspace2/jaehjung/mpsim
+            -- Names without digits ($ps_corr, $kos_release) were unaffected.
+            --
+            -- Expand such names ourselves, then delegate. Only the string
+            -- cmp-path inspects is rewritten; the real cmdline is untouched, so
+            -- the offset cmp replaces is unchanged and "$pl_worksp2/" stays
+            -- literal (`:e` expands it on <CR>).
+            local ok_path, cmp_path = pcall(require, 'cmp_path')
+            if ok_path then
+                local orig_dirname = cmp_path._dirname
+                cmp_path._dirname = function(self, params, option)
+                    local before = params.context.cursor_before_line
+                    local expanded = before:gsub('%$([%w_]+)/', function(name)
+                        local value = vim.env[name]
+                        -- returning nil leaves the original text in place
+                        return value and (value .. '/') or nil
+                    end)
+
+                    local target = params
+                    if expanded ~= before then
+                        local ctx = setmetatable(
+                            { cursor_before_line = expanded },
+                            { __index = params.context })
+                        target = setmetatable(
+                            { context = ctx }, { __index = params })
+                    end
+
+                    local dir = orig_dirname(self, target, option)
+
+                    -- Second quirk, independent of $VAR and affecting plain
+                    -- absolute paths too: the partial name being typed is
+                    -- stripped with '%a*$' (letters only), so a stem containing
+                    -- a digit is mistaken for a directory -- ".../z7sim" is cut
+                    -- to ".../z7". That directory does not exist, cmp-path
+                    -- returns nothing, and the 'cmdline' fallback doubles the
+                    -- path again. The mis-kept remnant is always a single
+                    -- component, so stepping up one level is enough.
+                    if dir and vim.fn.isdirectory(dir) == 0 then
+                        local parent = vim.fn.fnamemodify(dir, ':h')
+                        if parent ~= dir and vim.fn.isdirectory(parent) == 1 then
+                            return parent
+                        end
+                    end
+                    return dir
+                end
+            end
+
             -- '?' cmdline setup.
             cmp.setup.cmdline('?', {
                 mapping = cmp.mapping.preset.cmdline(),

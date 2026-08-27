@@ -1,7 +1,7 @@
 -- ~/.config/nvim/lua/custom/settings.lua
 
 -- NOTE: Set GUI font for nvim-qt (guifont is respected natively, no shim needed)
-vim.opt.guifont = 'JetBrains Mono NL:h18'
+--vim.opt.guifont = 'JetBrains Mono NL:h18'
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -153,3 +153,4 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Example: typing :mc becomes :MyCommand
 -- vim.cmd([[cnoreabbrev mc MyCommand]])
 vim.cmd([[cnoreabbrev run AsyncRun]])
+vim.cmd([[cnoreabbrev orun OverseerShell]])

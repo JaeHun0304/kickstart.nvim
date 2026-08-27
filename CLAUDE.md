@@ -45,7 +45,22 @@
 | `<C-n>` | Next quickfix item |
 | `<C-p>` | Previous quickfix item |
 
-### File/Buffer
+### Overseer (concurrent tasks)
+| Key | Action |
+|-----|--------|
+| `,ot` | Toggle task list |
+| `,oo` | Open task list |
+| `,or` | Run a task template |
+| `,oc` | Run a shell command (prefills `:OverseerShell `, has shell completion) |
+| `,oa` | Select a task to run an action on (restart/stop/open output/dispose) |
+
+The plugin defines exactly six commands: `OverseerOpen`, `OverseerClose`, `OverseerToggle`,
+`OverseerRun`, `OverseerShell`, `OverseerTaskAction`. `OverseerOpen`/`OverseerToggle` take an
+optional `left`/`right`/`bottom` arg and a `!` to keep the cursor in the current window;
+`OverseerShell` takes `!` to create a task without starting it.
+
+Inside the task list buffer, `<C-h/j/k/l>` are deliberately unbound so global window
+movement still works; detail and output scrolling live on `<M-h/l>` and `<M-k/j>`.
 | Key | Action |
 |-----|--------|
 | `,yf` | Copy filename |
@@ -165,7 +180,8 @@
 | vim-dirdiff | Directory diff (`:DirDiff`; excludes build artifacts, `.git`, `.svn`, `.claude`, `.cache`, `compile_commands.json`, etc.) |
 | vim-fetch | Open `file:line:col` args directly at that position |
 | goto-preview | Peek definition/references in floating window |
-| asyncrun.vim | Async shell commands (`:run` cmdline abbrev → `:AsyncRun`; quickfix auto-opens at height 15) |
+| asyncrun.vim | Async shell commands (`:run` cmdline abbrev → `:AsyncRun`; quickfix auto-opens at height 15). Single global job — a second `:run` while one is live fails with "background job is still running" |
+| overseer.nvim | Concurrent task runner (`:orun` cmdline abbrev → `:OverseerShell`; task list at `,ot`). Many jobs at once, each with its own output buffer; no quickfix component wired, so parallel tasks never clobber the shared quickfix list. `dap = false` (nvim-dap not installed) |
 | auto-session | Session auto-save on exit, auto-restore, auto-create |
 
 ## Disabled Plugins
@@ -179,7 +195,8 @@
 | Command | Action |
 |---------|--------|
 | `:Z7simPushMain` | `git push origin HEAD:refs/for/main` (Gerrit review, async via AsyncRun) |
-| `:run` | Cmdline abbreviation for `:AsyncRun` |
+| `:run` | Cmdline abbreviation for `:AsyncRun` (single job → quickfix) |
+| `:orun` | Cmdline abbreviation for `:OverseerShell` (concurrent jobs → per-task output buffers) |
 
 ## LSP Configuration
 - **C++ (clangd)**: `-j=6` background indexing threads, `--limit-results=50`, `--header-insertion=never`, `--log=error`. clang-tidy runs at clangd's default (no override flag). Folding range capability explicitly disabled (`foldingRangeProvider=false`) so nvim-ufo falls back to treesitter/indent.
