@@ -103,6 +103,13 @@ return {
         cmd_env = clangd_env,
         on_attach = on_attach,
         capabilities = caps,
+        before_init = function(params)
+          -- nvim-lspconfig's clangd preset still advertises the deprecated
+          -- offsetEncoding extension, which clangd drops in release 23.
+          -- Neovim already sends the standard general.positionEncodings, so
+          -- removing this loses no negotiation, only the warning.
+          params.capabilities.offsetEncoding = nil
+        end,
         on_init = function(client)
           -- Belt-and-suspenders: tell Neovim that this client doesn't provide folds
           client.server_capabilities.foldingRangeProvider = false

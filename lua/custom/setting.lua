@@ -142,12 +142,13 @@ vim.o.undofile = false
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
+--  See `:help vim.hl.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
-    vim.highlight.on_yank()
+    -- vim.hl exists from 0.11; vim.highlight is the pre-0.11 name.
+    (vim.hl or vim.highlight).on_yank()
   end,
 })
 -- Example: typing :mc becomes :MyCommand
