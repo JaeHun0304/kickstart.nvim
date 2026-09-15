@@ -11,6 +11,15 @@ return {
         { '<leader>dD', '<cmd>tab Git! diff --staged<CR>', desc = 'git diff staged (full tab)' },
         { '<leader>gt', '<cmd>G ls-files --error-unmatch %<CR>', desc = 'Is current file tracked by git?' },
       },
+      init = function()
+        -- :Gclog drops --decorate/--oneline (fugitive imposes its own pretty
+        -- format), so tags never show. An explicit --format survives; %d is the
+        -- ref decoration. The percents are escaped because fugitive expands a
+        -- bare % to the current file name.
+        vim.api.nvim_create_user_command('Gtlog', function(opts)
+          vim.cmd('Gclog --format=\\%h\\%d\\ \\%s ' .. opts.args)
+        end, { nargs = '*', desc = 'Fugitive quickfix log showing tags and refs' })
+      end,
     },
     {
       'sindrets/diffview.nvim',
