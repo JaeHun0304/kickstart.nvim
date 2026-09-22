@@ -1,30 +1,24 @@
--- ~/.config/nvim/lua/custom/plugins/bufferline.lua
+-- ~/.config/nvim/lua/custom/plugins/buffer.lua
+vim.keymap.set('n', '<leader>.', '<Cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<leader>m', '<Cmd>bprevious<CR>', { desc = 'Prev buffer' })
+vim.keymap.set('n', '<leader>bp', function()
+  require('telescope.builtin').buffers()
+end, { desc = 'Pick buffer' })
+vim.keymap.set('n', '<leader>bo', function()
+  local current = vim.api.nvim_get_current_buf()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if buf ~= current and vim.api.nvim_buf_get_option(buf, 'buflisted') then
+      vim.api.nvim_buf_delete(buf, {})
+    end
+  end
+end, { desc = 'Close other buffers' })
+
 return {
   {
-    "akinsho/bufferline.nvim",
-    event = "VeryLazy",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    opts = {
-      options = {
-        diagnostics = "nvim_lsp",
-        separator_style = "slant",
-        show_buffer_close_icons = false,
-        offsets = { { filetype = "NvimTree", text = "Explorer", highlight = "Directory", separator = true } },
-      },
-    },
+    'ojroques/nvim-bufdel',
     keys = {
-      { "<leader>bp", "<Cmd>BufferLinePick<CR>", desc = "Pick buffer" },
-      { "<leader>.", "<Cmd>BufferLineCycleNext<CR>", desc = "Next buffer" },
-      { "<leader>m", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev buffer" },
-      { "<leader>bb", "<Cmd>BufferLineTogglePin<CR>", desc = "Pin buffer" },
-      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Close others" },
+      { '<leader>bd', '<Cmd>BufDel<CR>', desc = 'Delete buffer keep layout' },
     },
-  },
-  {
-    "ojroques/nvim-bufdel",
-    keys = {
-      { "<leader>bd", "<Cmd>BufDel<CR>", desc = "Delete buffer keep layout" },
-    },
-    opts = { next = "alternate", quit = false },
+    opts = { next = 'alternate', quit = false },
   },
 }

@@ -67,11 +67,10 @@ movement still works; detail and output scrolling live on `<M-h/l>` and `<M-k/j>
 | `,yF` | Copy full path |
 | `,e` | Toggle NvimTree |
 | `,ef` | Find current file in NvimTree |
-| `,.` | Next buffer |
-| `,m` | Previous buffer |
-| `,bp` | Pick buffer |
-| `,bb` | Pin buffer |
-| `,bo` | Close other buffers |
+| `,.` | Next buffer (`:bnext`) |
+| `,m` | Previous buffer (`:bprevious`) |
+| `,bp` | Pick buffer (Telescope `buffers`) |
+| `,bo` | Close other buffers (custom function) |
 | `,bd` | Delete buffer (keep window layout) |
 
 ### Completion (nvim-cmp)
@@ -168,7 +167,6 @@ movement still works; detail and output scrolling live on `<M-h/l>` and `<M-k/j>
 | diffview.nvim | Git diff/merge (diff3_vertical, enhanced highlighting) |
 | gitsigns.nvim | Git signs in gutter (keymaps only, no default on_attach keymaps) |
 | nvim-tree.lua | File explorer (width=50, shows git-ignored files) |
-| bufferline.nvim | Buffer tabs (slant style, nvim-tree offset) |
 | nvim-bufdel | Buffer delete without closing window |
 | which-key.nvim | Keybind hints (custom leader-group labels) |
 | lualine.nvim + lsp-progress.nvim | Statusline with live LSP progress in the filename section |

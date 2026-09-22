@@ -30,6 +30,9 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'move cursor to right window' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'move cursor to lower window'})
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'move cursor to upper window'})
 
+-- NOTE: switch windows from terminal mode without manually leaving it first
+vim.keymap.set('t', '<C-w>w', [[<C-\><C-n><C-w>w]], { desc = 'Exit terminal mode + switch window' })
+
 -- NOTE: insert space in normal mode with <space>
 vim.keymap.set('n', '<space>', 'a<space><esc>', { desc = 'Insert space in normale mode' })
 
