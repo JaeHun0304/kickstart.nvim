@@ -35,6 +35,8 @@ return {
                 { '<leader>o_', hidden = true },
                 { '<leader>s',  group = '[S]earch' },
                 { '<leader>s_', hidden = true },
+                { '<leader>t',  group = 'Grapple [T]ags' },
+                { '<leader>t_', hidden = true },
                 { '<leader>w',  group = '[W]orkspace' },
             }
         end,

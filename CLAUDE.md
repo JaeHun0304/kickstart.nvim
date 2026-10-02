@@ -99,6 +99,13 @@ movement still works; detail and output scrolling live on `<M-h/l>` and `<M-k/j>
 | `,lf` | Format buffer (LSP, set on `LspAttach`) |
 | `[d` / `]d` | Prev/next diagnostic (floating) |
 
+### Breadcrumbs (dropbar)
+| Key | Action |
+|-----|--------|
+| `,;` | Pick a winbar breadcrumb symbol (opens dropdown menu) |
+| `[;` | Go to start of current context (enclosing function/class) |
+| `];` | Select next context |
+
 ### Telescope
 | Key | Action |
 |-----|--------|
@@ -116,7 +123,7 @@ movement still works; detail and output scrolling live on `<M-h/l>` and `<M-k/j>
 | `,sj` | Search jumplist |
 | `,sr` | Resume last search |
 | `,s.` | Recent files |
-| `,,` | Open buffers |
+| `,,` | Open buffers (MRU-sorted, current buffer hidden; `<M-d>` in insert / `d` in normal mode deletes buffer) |
 | `,lw` | Workspace symbols |
 | `,/` | Fuzzy find in current buffer |
 | `,gs` | Git status (changed files only, no untracked) |
@@ -140,6 +147,16 @@ movement still works; detail and output scrolling live on `<M-h/l>` and `<M-k/j>
 | `,dd` | Git diff (unified, colored, full tab via `:tab Git! diff`) |
 | `,dD` | Git diff staged (unified, full tab via `:tab Git! diff --staged`) |
 
+### Grapple (file tags)
+| Key | Action |
+|-----|--------|
+| `,ta` | Tag/untag current file |
+| `,tt` | Tags menu (editable list) |
+| `,tn` / `,tp` | Cycle next/previous tag |
+| `,1`–`,5` | Jump to tag slot 1–5 |
+
+Tags are scoped per git branch (`scope = 'git_branch'`, falls back to cwd outside git).
+
 ### Session (auto-session)
 | Key | Action |
 |-----|--------|
@@ -161,13 +178,13 @@ movement still works; detail and output scrolling live on `<M-h/l>` and `<M-k/j>
 | nvim-cmp + LuaSnip | Autocompletion + snippets (copilot source commented out/disabled) |
 | nvim-lspconfig + mason + mason-lspconfig | LSP (clangd for C++, lua_ls for Lua); mason ensures clangd installed |
 | telescope.nvim | Fuzzy finder (fzf-native, live-grep-args, ui-select) |
-| nvim-treesitter | Syntax highlighting (csv disabled; python/ruby also use vim regex highlighting) |
-| nvim-treesitter-context | Shows function/class context at top of window (max 3 lines, cursor mode) |
+| dropbar.nvim | Winbar breadcrumbs (`Namespace > Class > function`) for the symbol under cursor; C++ symbols come from clangd (LSP source) |
 | tpope/vim-fugitive | Git commands (`:G`, `:Git`, etc.) |
 | diffview.nvim | Git diff/merge (diff3_vertical, enhanced highlighting) |
 | gitsigns.nvim | Git signs in gutter (keymaps only, no default on_attach keymaps) |
 | nvim-tree.lua | File explorer (width=50, shows git-ignored files) |
 | nvim-bufdel | Buffer delete without closing window |
+| grapple.nvim | Tag working files and jump to them by slot number |
 | which-key.nvim | Keybind hints (custom leader-group labels) |
 | lualine.nvim + lsp-progress.nvim | Statusline with live LSP progress in the filename section |
 | mini.nvim | mini.ai (textobjects), mini.surround, mini.comment (mini.pairs commented out) |
@@ -188,6 +205,7 @@ movement still works; detail and output scrolling live on `<M-h/l>` and `<M-k/j>
 | indent-blankline.nvim | `enabled = false` in `format.lua` |
 | mini.pairs | Commented out in `mini.lua` (auto-bracket-closing not wanted) |
 | copilot source | Commented out of nvim-cmp sources in `autocomplete.lua` |
+| nvim-treesitter + nvim-treesitter-context | Parked in `treesitter.lua.bak` (not loaded); using nvim's built-in treesitter instead, which ships parsers only for c, lua, markdown, query, vim, vimdoc (no cpp) |
 
 ## Custom Commands
 | Command | Action |
@@ -197,8 +215,8 @@ movement still works; detail and output scrolling live on `<M-h/l>` and `<M-k/j>
 | `:orun` | Cmdline abbreviation for `:OverseerShell` (concurrent jobs → per-task output buffers) |
 
 ## LSP Configuration
-- **C++ (clangd)**: `-j=6` background indexing threads, `--limit-results=50`, `--header-insertion=never`, `--log=error`. clang-tidy runs at clangd's default (no override flag). Folding range capability explicitly disabled (`foldingRangeProvider=false`) so nvim-ufo falls back to treesitter/indent.
+- **C++ (clangd)**: `-j=2` background indexing threads, `--pch-storage=disk`, `--limit-results=50`, `--header-insertion=never`, `--log=error`. clang-tidy runs at clangd's default (no override flag). Folding range capability explicitly disabled (`foldingRangeProvider=false`) so nvim-ufo falls back to treesitter/indent.
 - **Lua (lua_ls)**: Configured for Neovim development (recognizes `vim`/`require` globals, uses Neovim runtime files as workspace library, LuaJIT runtime, telemetry off).
-- **Custom clangd path**: `/tool/pandora64/.package/llvm-20.1.7-gcc1020/bin/clangd` on hosts matching `atletx7*`/`atlvibex*`; otherwise mason-installed clangd (`~/.local/share/nvim/mason/bin/clangd`).
+- **clangd path**: plain `clangd` resolved from `$PATH`; `~/.bashrc` puts the pandora llvm clangd on `PATH` and its grpc libs on `LD_LIBRARY_PATH`, so nvim must be launched from a shell that sourced `~/.bashrc`.
 - **Document highlight**: Cursor-hold symbol-reference highlighting wired per-buffer only for real file buffers (skips special buftypes), cleared on cursor move.
 - **Diagnostics**: virtual text with source prefix `●`, signs, underline, severity-sorted; floating diagnostic window auto-shown on `CursorHold`.

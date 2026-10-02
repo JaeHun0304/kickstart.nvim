@@ -68,11 +68,6 @@ return {
                 --  All the info you're looking for is in `:help telescope.setup()`
                 defaults = {
                     layout_strategy = 'flex',
-                    mappings = {
-                        n = {
-                            ['d'] = require('telescope.actions').delete_buffer,
-                        },
-                    },
                     vimgrep_arguments = {
                         "rg",
                         "--color=never",
@@ -83,6 +78,21 @@ return {
                         "--smart-case",
                     },
                     file_ignore_patterns = {".git/", ".svn/", ".cache/", "%.o", "%.d"}
+                },
+
+                pickers = {
+                    buffers = {
+                        -- Most recently used first; current buffer hidden, so
+                        -- `,,<CR>` jumps straight to the alternate buffer
+                        sort_mru = true,
+                        ignore_current_buffer = true,
+                        sort_lastused = true,
+                        mappings = {
+                            -- <C-d> is taken by preview scrolling, so use <M-d> in insert mode
+                            i = { ['<M-d>'] = require('telescope.actions').delete_buffer },
+                            n = { ['d'] = require('telescope.actions').delete_buffer },
+                        },
+                    },
                 },
 
                 extensions = {
