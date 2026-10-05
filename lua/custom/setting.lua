@@ -86,6 +86,21 @@ vim.opt.showmode = false
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
+-- Inside tmux, refresh DISPLAY from the tmux session at startup and on focus/resume, so
+-- the xclip clipboard provider keeps working after an ETX reconnect changes the display.
+-- Startup matters too: nvim inherits DISPLAY from a shell that may still be stale.
+if vim.env.TMUX then
+  local function refresh_display()
+    local l_out = vim.fn.system({ 'tmux', 'show-environment', 'DISPLAY' })
+    local l_disp = l_out:match('^DISPLAY=(%S+)')
+    if l_disp then
+      vim.env.DISPLAY = l_disp
+    end
+  end
+  refresh_display()
+  vim.api.nvim_create_autocmd({ 'FocusGained', 'VimResume' }, { callback = refresh_display })
+end
+
 -- Enable break indent
 vim.opt.breakindent = true
 
