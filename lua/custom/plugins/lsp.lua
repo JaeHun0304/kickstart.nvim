@@ -62,7 +62,7 @@ return {
         -- Resolved from $PATH (and LD_LIBRARY_PATH for its grpc libs) as set up in ~/.bashrc
         cmd = { "clangd",
         -- Bound background indexing: each worker can hold several GB while parsing a TU
-        "-j=4",
+        "-j=2",
         -- Keep preamble PCHs on disk instead of in RAM
         "--pch-storage=disk",
         -- Reduce completion items to speed up responses
