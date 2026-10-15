@@ -43,20 +43,51 @@ return {
                 vim.notify('nvim-treesitter: `tree-sitter` CLI not found in PATH; parsers will not be installed', vim.log.levels.WARN)
             end
 
+            local function start(buf, ft)
+                if not vim.api.nvim_buf_is_valid(buf) or vim.treesitter.highlighter.active[buf] then
+                    return
+                end
+                local lang = vim.treesitter.language.get_lang(ft)
+                if not lang or not pcall(vim.treesitter.language.add, lang) then
+                    return -- no parser installed for this filetype
+                end
+                -- Skip very large files (e.g. generated sources); parsing them is slow.
+                local lines = vim.api.nvim_buf_line_count(buf)
+                if vim.api.nvim_buf_get_offset(buf, lines) > 2 * 1024 * 1024 then
+                    return
+                end
+                pcall(vim.treesitter.start, buf, lang)
+            end
+
+            local group = vim.api.nvim_create_augroup('custom_treesitter_start', { clear = true })
             vim.api.nvim_create_autocmd('FileType', {
-                group = vim.api.nvim_create_augroup('custom_treesitter_start', { clear = true }),
-                callback = function(args)
-                    local lang = vim.treesitter.language.get_lang(args.match)
-                    if not lang or not pcall(vim.treesitter.language.add, lang) then
-                        return -- no parser installed for this filetype
-                    end
-                    -- Skip very large files (e.g. generated sources); parsing them is slow.
-                    local lines = vim.api.nvim_buf_line_count(args.buf)
-                    if vim.api.nvim_buf_get_offset(args.buf, lines) > 2 * 1024 * 1024 then
-                        return
-                    end
-                    pcall(vim.treesitter.start, args.buf, lang)
+                group = group,
+                callback = function(args) start(args.buf, args.match) end,
+            })
+            -- A file buffer that ends up with no filetype (seen at startup / session restore; `:e %` fixed it)
+            -- gets neither syntax nor treesitter colors. Run detection for it, then start treesitter.
+            local function fix(buf)
+                if not vim.api.nvim_buf_is_loaded(buf) or vim.bo[buf].buftype ~= '' then
+                    return
+                end
+                if vim.bo[buf].filetype == '' and vim.api.nvim_buf_get_name(buf) ~= '' then
+                    vim.api.nvim_buf_call(buf, function() vim.cmd('filetype detect') end)
+                end
+                if vim.bo[buf].filetype ~= '' then
+                    start(buf, vim.bo[buf].filetype)
+                end
+            end
+            vim.api.nvim_create_autocmd({ 'VimEnter', 'SessionLoadPost' }, {
+                group = group,
+                callback = function()
+                    vim.schedule(function()
+                        for _, b in ipairs(vim.api.nvim_list_bufs()) do fix(b) end
+                    end)
                 end,
+            })
+            vim.api.nvim_create_autocmd('BufWinEnter', {
+                group = group,
+                callback = function(args) vim.schedule(function() fix(args.buf) end) end,
             })
         end,
     },
